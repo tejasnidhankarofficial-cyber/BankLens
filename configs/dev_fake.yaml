@@ -1,0 +1,7 @@
+name: dev_fake
+parser: pymupdf
+chunking: {strategy: section_table, chunk_size: 512, overlap: 64}
+embedding: {provider: hash}
+retrieval: {mode: hybrid, top_k: 5, candidate_k: 30, metadata_filter: true}
+rerank: {enabled: false}
+llm: {provider: fake}

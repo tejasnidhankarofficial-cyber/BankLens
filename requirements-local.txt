@@ -1,0 +1,2 @@
+# Free local models (CPU): cross-encoder reranker and local embeddings
+sentence-transformers>=3.0

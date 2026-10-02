@@ -1,0 +1,15 @@
+name: 03_hybrid
+parser: pymupdf
+chunking:
+  strategy: section_table
+  chunk_size: 512
+  overlap: 64
+  contextual_header: false
+embedding: {provider: openai, model: text-embedding-3-small}
+retrieval:
+  mode: hybrid
+  top_k: 5
+  candidate_k: 30
+  metadata_filter: false
+rerank: {enabled: false, model: BAAI/bge-reranker-base}
+llm: {provider: openai, model: gpt-4.1-mini, temperature: 0.0, max_tokens: 600}
