@@ -20,9 +20,7 @@ class Cache:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._lock = threading.Lock()
         self._conn = sqlite3.connect(self.path, check_same_thread=False)
-        self._conn.execute(
-            "CREATE TABLE IF NOT EXISTS kv (k TEXT PRIMARY KEY, v TEXT NOT NULL)"
-        )
+        self._conn.execute("CREATE TABLE IF NOT EXISTS kv (k TEXT PRIMARY KEY, v TEXT NOT NULL)")
         self._conn.commit()
         self.hits = 0
         self.misses = 0
@@ -38,9 +36,7 @@ class Cache:
 
     def set(self, key: str, value) -> None:
         with self._lock:
-            self._conn.execute(
-                "INSERT OR REPLACE INTO kv VALUES (?,?)", (key, json.dumps(value))
-            )
+            self._conn.execute("INSERT OR REPLACE INTO kv VALUES (?,?)", (key, json.dumps(value)))
             self._conn.commit()
 
     def get_many(self, keys: list[str]) -> dict[str, object]:
@@ -72,9 +68,7 @@ class CostLedger:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.session_usd = 0.0
 
-    def record(
-        self, kind: str, model: str, tokens_in: int, tokens_out: int, usd: float
-    ) -> None:
+    def record(self, kind: str, model: str, tokens_in: int, tokens_out: int, usd: float) -> None:
         self.session_usd += usd
         row = {
             "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),

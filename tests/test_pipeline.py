@@ -56,9 +56,7 @@ def test_all_retrieval_modes_and_filter(fake_corpus):
             },
         )
         hits, f = p.retriever.retrieve("What was Wells Fargo net income in 2025?", 4)
-        assert hits and all(
-            h.chunk.ticker == "WFC" and h.chunk.fiscal_year == 2025 for h in hits
-        )
+        assert hits and all(h.chunk.ticker == "WFC" and h.chunk.fiscal_year == 2025 for h in hits)
         assert f == Filter(["WFC"], [2025])
 
 
@@ -70,9 +68,7 @@ def test_year_filter_falls_back_to_bank(fake_corpus):
 
 
 def test_bm25_finds_table_numbers(fake_corpus):
-    cfg, p = _pipe(
-        fake_corpus, retrieval={"mode": "bm25", "top_k": 3, "metadata_filter": False}
-    )
+    cfg, p = _pipe(fake_corpus, retrieval={"mode": "bm25", "top_k": 3, "metadata_filter": False})
     hits, _ = p.retriever.retrieve("net income 58,000", 3)
     assert hits[0].chunk.kind == "table" and hits[0].chunk.ticker == "JPM"
 
@@ -93,8 +89,9 @@ def test_ask_verify_and_logging(fake_corpus):
     v2 = p.verify("Wells Fargo is about to be acquired")
     assert v2.verdict == "NOT_ENOUGH_INFO"
 
-    rows = [json.loads(line) for line in open(p.log_path)]
-    assert len(rows) == 4 and rows[0]["retrieved"] and rows[0]["prompt_hash"]
+    rows = [json.loads(line) for line in open(p.log_path)][-4:]
+    assert [r["mode"] for r in rows] == ["ask", "ask", "verify", "verify"]
+    assert rows[0]["retrieved"] and rows[0]["prompt_hash"]
 
 
 def test_invalid_citations_dropped(fake_corpus):
@@ -112,19 +109,13 @@ def test_api(fake_corpus, monkeypatch):
     client = TestClient(m.app)
     assert client.get("/health").json()["status"] == "ok"
     assert len(client.get("/documents").json()) == 4
-    j = client.post(
-        "/ask", json={"question": "CET1 ratio for Wells Fargo in 2025"}
-    ).json()
+    j = client.post("/ask", json={"question": "CET1 ratio for Wells Fargo in 2025"}).json()
     assert j["citations"][0]["bank"] == "Wells Fargo"
     assert (
-        client.post(
-            "/verify", json={"claim": "Wells Fargo net income was 19,000"}
-        ).json()["verdict"]
+        client.post("/verify", json={"claim": "Wells Fargo net income was 19,000"}).json()["verdict"]
         == "SUPPORTED"
     )
-    img = client.get(
-        "/page_image/jpm_fy2025/2", params={"highlight": "CET1 capital ratio was 15.7%"}
-    )
+    img = client.get("/page_image/jpm_fy2025/2", params={"highlight": "CET1 capital ratio was 15.7%"})
     assert img.status_code == 200 and img.content[:4] == b"\x89PNG"
     assert client.get("/page_image/jpm_fy2025/99").status_code == 404
     assert client.get("/page_image/nope/1").status_code == 404

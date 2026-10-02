@@ -15,9 +15,7 @@ def main() -> None:
     load_dotenv()
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
-    ap.add_argument(
-        "--force", action="store_true", help="rebuild even if the index exists"
-    )
+    ap.add_argument("--force", action="store_true", help="rebuild even if the index exists")
     a = ap.parse_args()
     cfg = load_config(a.config)
     ledger = CostLedger(cfg.path("log_dir"))

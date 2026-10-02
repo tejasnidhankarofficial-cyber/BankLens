@@ -67,9 +67,7 @@ class Chunk:
 
 
 def context_header(doc: DocumentInfo, section: str, page_label: str) -> str:
-    return (
-        f"[{doc.bank} | FY{doc.fiscal_year} | {section or 'n/a'} | p. {page_label}]\n"
-    )
+    return f"[{doc.bank} | FY{doc.fiscal_year} | {section or 'n/a'} | p. {page_label}]\n"
 
 
 def _paragraphs(text: str) -> list[str]:
@@ -152,19 +150,13 @@ def chunk_page(page: Page, doc: DocumentInfo, cfg: ChunkingConfig) -> list[Chunk
                 for part in _split_table(b.text, _table_prefix(b), cfg.chunk_size):
                     raw.append((part, b.section, "table"))
             else:
-                for p in _paragraphs(b.text) or (
-                    [b.text.strip()] if b.text.strip() else []
-                ):
+                for p in _paragraphs(b.text) or ([b.text.strip()] if b.text.strip() else []):
                     pending.append((p, b.section))
         flush()
 
     chunks = []
     for i, (text, section, kind) in enumerate(raw):
-        header = (
-            context_header(doc, section, page.page_label)
-            if cfg.contextual_header
-            else ""
-        )
+        header = context_header(doc, section, page.page_label) if cfg.contextual_header else ""
         chunks.append(
             Chunk(
                 chunk_id=f"{doc.doc_id}:p{page.page_index}:c{i}",
@@ -183,9 +175,7 @@ def chunk_page(page: Page, doc: DocumentInfo, cfg: ChunkingConfig) -> list[Chunk
     return chunks
 
 
-def chunk_document(
-    pages: list[Page], doc: DocumentInfo, cfg: ChunkingConfig
-) -> list[Chunk]:
+def chunk_document(pages: list[Page], doc: DocumentInfo, cfg: ChunkingConfig) -> list[Chunk]:
     out: list[Chunk] = []
     for p in pages:
         out.extend(chunk_page(p, doc, cfg))

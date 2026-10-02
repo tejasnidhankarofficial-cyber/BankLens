@@ -14,15 +14,9 @@ def test_units_regex():
 
 
 def test_headings():
-    assert (
-        heading_of("Item 7. Management's Discussion")
-        == "Item 7. Management's Discussion"
-    )
+    assert heading_of("Item 7. Management's Discussion") == "Item 7. Management's Discussion"
     assert heading_of("capital risk management") == "Capital Risk Management"
-    assert (
-        heading_of("The company has capital risk management practices and more words")
-        is None
-    )
+    assert heading_of("The company has capital risk management practices and more words") is None
 
 
 def test_pymupdf_tables_labels_sections(fake_corpus):
@@ -37,11 +31,7 @@ def test_pymupdf_tables_labels_sections(fake_corpus):
     t = tables[0]
     assert "Net income" in t.text and "58,000" in t.text
     assert t.units == "in millions"
-    assert (
-        "Consolidated Results of Operations" in t.title
-        or t.title == "(in millions)"
-        or t.title
-    )
+    assert "Consolidated Results of Operations" in t.title or t.title == "(in millions)" or t.title
     assert t.section == "Consolidated Results of Operations"
 
 

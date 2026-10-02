@@ -24,9 +24,7 @@ def _chroma(path: Path):
     import chromadb
     from chromadb.config import Settings
 
-    return chromadb.PersistentClient(
-        path=str(path / "chroma"), settings=Settings(anonymized_telemetry=False)
-    )
+    return chromadb.PersistentClient(path=str(path / "chroma"), settings=Settings(anonymized_telemetry=False))
 
 
 class Index:
@@ -70,9 +68,7 @@ def build_index(
     if not chunks:
         raise RuntimeError("no chunks produced; are the PDFs in data/raw/?")
 
-    log(
-        f"embedding {len(chunks)} chunks with {cfg.embedding.provider}:{cfg.embedding.model}"
-    )
+    log(f"embedding {len(chunks)} chunks with {cfg.embedding.provider}:{cfg.embedding.model}")
     vecs = embedder.embed([c.embed_text for c in chunks])
 
     client = _chroma(path)
@@ -100,9 +96,7 @@ def build_index(
             indent=2,
         )
     )
-    log(
-        f"index {cfg.index_id} built: {len(chunks)} chunks. session cost ${ledger.session_usd:.4f}"
-    )
+    log(f"index {cfg.index_id} built: {len(chunks)} chunks. session cost ${ledger.session_usd:.4f}")
     return Index(chunks, col)
 
 
@@ -110,9 +104,7 @@ def load_index(cfg: Config) -> Index:
     path = index_path(cfg)
     f = path / "chunks.jsonl"
     if not f.exists():
-        raise FileNotFoundError(
-            f"No index at {path}. Run: python -m scripts.ingest --config <config.yaml>"
-        )
+        raise FileNotFoundError(f"No index at {path}. Run: python -m scripts.ingest --config <config.yaml>")
     with open(f) as fh:
         chunks = [Chunk(**json.loads(line)) for line in fh if line.strip()]
     col = _chroma(path).get_collection(COLLECTION, embedding_function=None)

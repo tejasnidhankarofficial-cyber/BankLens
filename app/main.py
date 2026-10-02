@@ -46,9 +46,7 @@ app = FastAPI(title="BankLens", lifespan=lifespan)
 
 @app.get("/health")
 def health():
-    cfg = STATE.get("cfg") or load_config(
-        os.getenv("BANKLENS_CONFIG", "configs/05_rerank.yaml")
-    )
+    cfg = STATE.get("cfg") or load_config(os.getenv("BANKLENS_CONFIG", "configs/05_rerank.yaml"))
     p = STATE.get("pipeline")
     return {
         "status": "ok" if p else "no_index",
@@ -61,9 +59,7 @@ def health():
 
 @app.get("/documents", response_model=list[DocumentOut])
 def documents():
-    cfg = STATE.get("cfg") or load_config(
-        os.getenv("BANKLENS_CONFIG", "configs/05_rerank.yaml")
-    )
+    cfg = STATE.get("cfg") or load_config(os.getenv("BANKLENS_CONFIG", "configs/05_rerank.yaml"))
     return [DocumentOut(**d.model_dump()) for d in load_manifest(cfg)]
 
 
@@ -72,7 +68,7 @@ def ask(req: AskRequest):
     try:
         return get_pipeline().ask(req.question)
     except FileNotFoundError as e:
-        raise HTTPException(503, str(e))
+        raise HTTPException(503, str(e)) from e
 
 
 @app.post("/verify", response_model=VerifyResponse)
@@ -80,7 +76,7 @@ def verify(req: VerifyRequest):
     try:
         return get_pipeline().verify(req.claim)
     except FileNotFoundError as e:
-        raise HTTPException(503, str(e))
+        raise HTTPException(503, str(e)) from e
 
 
 def _search_rects(page, snippet: str):

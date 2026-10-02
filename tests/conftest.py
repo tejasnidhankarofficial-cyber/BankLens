@@ -33,9 +33,7 @@ BANKS = {
 }
 
 
-def make_pdf(
-    path: Path, bank: str, year: str, cet1: str, ni: str, ni_prev: str
-) -> None:
+def make_pdf(path: Path, bank: str, year: str, cet1: str, ni: str, ni_prev: str) -> None:
     def footer(canvas, doc):
         n = doc.page
         label = {1: None, 2: f"{bank} Form 10-K 45", 3: "46"}.get(n)
@@ -46,9 +44,7 @@ def make_pdf(
     prev = str(int(year) - 1)
     story = [Paragraph(f"{bank} Annual Report {year}", STY["Title"])]
     for i in range(1, 8):
-        story.append(
-            Paragraph(f"Item {i}. Placeholder table of contents entry", STY["Normal"])
-        )
+        story.append(Paragraph(f"Item {i}. Placeholder table of contents entry", STY["Normal"]))
     story.append(PageBreak())
     story += [
         Paragraph("Item 7. Management's Discussion and Analysis", STY["Heading2"]),
@@ -58,9 +54,7 @@ def make_pdf(
             STY["Normal"],
         ),
         Spacer(1, 12),
-        Paragraph(
-            "Liquidity risk is managed centrally by corporate treasury.", STY["Normal"]
-        ),
+        Paragraph("Liquidity risk is managed centrally by corporate treasury.", STY["Normal"]),
         PageBreak(),
         Paragraph("Consolidated Results of Operations", STY["Heading3"]),
         Paragraph("(in millions)", STY["Normal"]),
@@ -75,9 +69,7 @@ def make_pdf(
     )
     t.setStyle(TableStyle([("GRID", (0, 0), (-1, -1), 0.8, colors.black)]))
     story.append(t)
-    SimpleDocTemplate(str(path), pagesize=letter).build(
-        story, onFirstPage=footer, onLaterPages=footer
-    )
+    SimpleDocTemplate(str(path), pagesize=letter).build(story, onFirstPage=footer, onLaterPages=footer)
 
 
 @pytest.fixture(scope="session")

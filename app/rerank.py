@@ -20,7 +20,4 @@ class Reranker:
             return []
         scores = self.model.predict([(query, h.chunk.embed_text) for h in hits])
         order = sorted(range(len(hits)), key=lambda i: -scores[i])[:top_k]
-        return [
-            Hit(hits[i].chunk, float(scores[i]), r)
-            for r, i in enumerate(order, start=1)
-        ]
+        return [Hit(hits[i].chunk, float(scores[i]), r) for r, i in enumerate(order, start=1)]

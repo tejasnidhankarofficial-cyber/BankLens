@@ -1,0 +1,8 @@
+# Free config (hash embeddings, no API) used only to build chunks.jsonl for eval/label_helper.py
+name: label
+parser: pymupdf
+chunking: {strategy: section_table, chunk_size: 512, overlap: 64}
+embedding: {provider: hash}
+retrieval: {mode: bm25, top_k: 5}
+rerank: {enabled: false}
+llm: {provider: fake}

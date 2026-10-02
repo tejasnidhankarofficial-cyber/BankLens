@@ -86,17 +86,13 @@ class Pipeline:
             for h in hits
         ]
 
-    def _log(
-        self, mode: str, text: str, hits: list[Hit], prompt_hash: str, out: dict
-    ) -> None:
+    def _log(self, mode: str, text: str, hits: list[Hit], prompt_hash: str, out: dict) -> None:
         row = {
             "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "config": self.cfg.name,
             "mode": mode,
             "input": text,
-            "retrieved": [
-                {"chunk_id": h.chunk.chunk_id, "score": h.score} for h in hits
-            ],
+            "retrieved": [{"chunk_id": h.chunk.chunk_id, "score": h.score} for h in hits],
             "prompt_hash": prompt_hash,
             "output": out,
         }

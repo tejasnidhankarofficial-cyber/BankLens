@@ -1,0 +1,8 @@
+.venv
+.git
+data/raw
+indexes
+cache
+logs
+__pycache__
+.env

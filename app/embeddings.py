@@ -75,13 +75,7 @@ class Embedder:
             # Truncate very long inputs to stay under the 8191-token limit.
             texts = [t[:24000] for t in texts]
             resp = self._client.embeddings.create(model=self.model, input=texts)
-            tokens = (
-                resp.usage.total_tokens
-                if resp.usage
-                else sum(count_tokens(t) for t in texts)
-            )
-            self.ledger.record(
-                "embedding", self.model, tokens, 0, tokens * self.price / 1e6
-            )
+            tokens = resp.usage.total_tokens if resp.usage else sum(count_tokens(t) for t in texts)
+            self.ledger.record("embedding", self.model, tokens, 0, tokens * self.price / 1e6)
             return [d.embedding for d in resp.data]
         raise ValueError(self.provider)

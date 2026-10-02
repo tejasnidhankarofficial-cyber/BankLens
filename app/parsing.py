@@ -11,9 +11,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-UNITS_RE = re.compile(
-    r"\((?:dollars |\$ )?in (millions|billions|thousands)[^)]*\)", re.IGNORECASE
-)
+UNITS_RE = re.compile(r"\((?:dollars |\$ )?in (millions|billions|thousands)[^)]*\)", re.IGNORECASE)
 ITEM_RE = re.compile(r"^Item\s+\d+[A-C]?\.?", re.IGNORECASE)
 
 # Bank MD&A / financial-statement headings that update the current section.
@@ -167,21 +165,15 @@ def parse_pymupdf(path: str) -> list[Page]:
         text_blocks = [
             (b[1], b[0], b[4].strip(), b)
             for b in raw
-            if b[6] == 0
-            and b[4].strip()
-            and not any(_bbox_intersects(b[:4], tb) for tb in table_boxes)
+            if b[6] == 0 and b[4].strip() and not any(_bbox_intersects(b[:4], tb) for tb in table_boxes)
         ]
         # Items to be ordered by vertical position: ("text", y, text) / ("table", y, table)
-        items: list[tuple[float, str, object]] = [
-            (y, "text", txt) for y, _x, txt, _ in text_blocks
-        ]
+        items: list[tuple[float, str, object]] = [(y, "text", txt) for y, _x, txt, _ in text_blocks]
         for t in tables:
             items.append((t.bbox[1], "table", t))
         items.sort(key=lambda it: it[0])
 
-        all_lines = [
-            ln for _, k, v in items if k == "text" for ln in str(v).splitlines()
-        ]
+        all_lines = [ln for _, k, v in items if k == "text" for ln in str(v).splitlines()]
         toc = count_item_headings(all_lines) > 5
 
         blocks: list[Block] = []
@@ -206,9 +198,7 @@ def parse_pymupdf(path: str) -> list[Page]:
                     if len(title) > 150 or UNITS_RE.fullmatch(title.strip()):
                         title = last[0].strip()[:150] if last else ""
                 units = find_units(*(prev_texts[-2:][::-1]), md[:400])
-                blocks.append(
-                    Block("table", md, section=section, title=title, units=units, y=y)
-                )
+                blocks.append(Block("table", md, section=section, title=title, units=units, y=y))
 
         lines = [ln for ln in pg.get_text("text").splitlines()]
         pages.append(Page(i, detect_page_label(lines, i), section, blocks))

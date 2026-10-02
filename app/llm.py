@@ -70,16 +70,10 @@ def fake_complete(system: str, user: str) -> str:
                         "evidence": [n],
                     }
                 )
-        return json.dumps(
-            {"verdict": "NOT_ENOUGH_INFO", "explanation": "not found", "evidence": []}
-        )
+        return json.dumps({"verdict": "NOT_ENOUGH_INFO", "explanation": "not found", "evidence": []})
     question = tail.replace("QUESTION:", "").strip()
     years = [int(y) for y in re.findall(r"\b(20\d\d)\b", question)]
-    if (
-        not excerpts
-        or any(y >= 2026 for y in years)
-        or re.search(r"\bwill\b", question.lower())
-    ):
+    if not excerpts or any(y >= 2026 for y in years) or re.search(r"\bwill\b", question.lower()):
         return json.dumps({"answer": None, "citations": [], "abstain": True})
     first = excerpts[0].split("\n", 1)[-1].strip().splitlines()[0][:200]
     return json.dumps({"answer": first, "citations": [1], "abstain": False})
@@ -116,11 +110,7 @@ class LLM:
             tin, tout = count_tokens(system + user), count_tokens(text)
         else:
             text, tin, tout = self._openai(system, user)
-        usd = (
-            (tin * c.price_in + tout * c.price_out) / 1e6
-            if c.provider == "openai"
-            else 0.0
-        )
+        usd = (tin * c.price_in + tout * c.price_out) / 1e6 if c.provider == "openai" else 0.0
         if usd:
             self.ledger.record(kind, c.model, tin, tout, usd)
         self.cache.set(key, {"text": text, "in": tin, "out": tout})

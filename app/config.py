@@ -73,9 +73,7 @@ class Config(BaseModel):
             "chunking": self.chunking.model_dump(),
             "embedding": self.embedding.model_dump(),
         }
-        return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()[
-            :12
-        ]
+        return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:12]
 
     def path(self, attr: str) -> Path:
         p = Path(getattr(self, attr))

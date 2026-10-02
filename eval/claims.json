@@ -1,0 +1,58 @@
+[
+  {
+    "id": "c901",
+    "claim": "Citigroup is about to be acquired by a foreign bank.",
+    "label": "NOT_ENOUGH_INFO",
+    "perturbation": "unverifiable",
+    "sources": []
+  },
+  {
+    "id": "c902",
+    "claim": "Wells Fargo is facing an imminent bank run.",
+    "label": "NOT_ENOUGH_INFO",
+    "perturbation": "unverifiable",
+    "sources": []
+  },
+  {
+    "id": "c903",
+    "claim": "JPMorgan Chase plans to relocate its headquarters out of New York in 2026.",
+    "label": "NOT_ENOUGH_INFO",
+    "perturbation": "unverifiable",
+    "sources": []
+  },
+  {
+    "id": "c904",
+    "claim": "Bank of America will cut its dividend next quarter.",
+    "label": "NOT_ENOUGH_INFO",
+    "perturbation": "unverifiable",
+    "sources": []
+  },
+  {
+    "id": "c905",
+    "claim": "A major US bank has secretly lost most of its deposits this month.",
+    "label": "NOT_ENOUGH_INFO",
+    "perturbation": "unverifiable",
+    "sources": []
+  },
+  {
+    "id": "c906",
+    "claim": "Wells Fargo's CEO is resigning next year.",
+    "label": "NOT_ENOUGH_INFO",
+    "perturbation": "unverifiable",
+    "sources": []
+  },
+  {
+    "id": "c907",
+    "claim": "Citigroup holds large undisclosed losses on cryptocurrency.",
+    "label": "NOT_ENOUGH_INFO",
+    "perturbation": "unverifiable",
+    "sources": []
+  },
+  {
+    "id": "c908",
+    "claim": "JPMorgan will report a record profit in 2027.",
+    "label": "NOT_ENOUGH_INFO",
+    "perturbation": "unverifiable",
+    "sources": []
+  }
+]

@@ -1,0 +1,19 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    env_file: .env
+    environment:
+      BANKLENS_CONFIG: ${BANKLENS_CONFIG:-configs/05_rerank.yaml}
+    volumes:
+      - ./data:/app/data
+      - ./indexes:/app/indexes
+      - ./cache:/app/cache
+      - ./logs:/app/logs
+  ui:
+    build: .
+    command: ["streamlit", "run", "ui/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    ports: ["8501:8501"]
+    environment:
+      BANKLENS_API: http://api:8000
+    depends_on: [api]
