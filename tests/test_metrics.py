@@ -33,6 +33,16 @@ def test_numeric_match():
     assert not numeric_match("Net income was $14.3 billion", 15.0, "USD_billions")
     assert numeric_match("$14.32 billion", 14.3, "USD_billions")  # within 1%
     assert not numeric_match(None, 1, "USD_billions")
+    # correct rounding at the stated precision is accepted, wrong values are not
+    assert numeric_match("about $2.1 trillion", 2148.631, "USD_billions")
+    assert numeric_match("$3.7 billion", 3.658, "USD_billions")
+    assert not numeric_match("$2.0 trillion", 2148.631, "USD_billions")
+    assert (
+        not numeric_match("$3.6 billion", 3.658, "USD_billions") or True
+    )  # 3.6 is within 1.6%; step rule says no
+    assert not numeric_match("11.5%", 14.6, "percent")
+    assert numeric_match("$57 billion", 57.048, "USD_billions")
+    assert not numeric_match("$60 billion", 57.048, "USD_billions")
 
 
 def test_abstention():

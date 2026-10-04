@@ -120,11 +120,25 @@ def run(cfg: Config, args) -> dict:
         guard()
         print(f"  c {i}/{len(claims)} {c['id']}", end="\r")
 
+    # A fully cached re-run (e.g. after a metric fix) reports ~0 ms and $0. Keep the original measurements.
+    spent = pipe.ledger.session_usd - cost0
+    prior_path = Path(args.out_dir) / f"{cfg.name}{'_retrieval' if args.retrieval_only else ''}.json"
+    carried = None
+    if spent == 0 and prior_path.exists():
+        carried = json.loads(prior_path.read_text())
+        old_rows = {r["id"]: r for r in carried.get("questions", []) + carried.get("claims", [])}
+        for r in q_rows + c_rows:
+            o = old_rows.get(r["id"], {})
+            for k in ("latency_ms", "cost_usd"):
+                if k in o:
+                    r[k] = o[k]
+
     result: dict = {
         "name": cfg.name, "config": cfg.model_dump(), "git_commit": git_commit(),
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"), "judge": bool(judge),
         "retrieval_only": args.retrieval_only, "n_questions": len(q_rows), "n_claims": len(c_rows),
-        "cost_usd": pipe.ledger.session_usd - cost0, "wall_seconds": time.time() - t0,
+        "cost_usd": carried["cost_usd"] if carried else spent, "wall_seconds": time.time() - t0,
+        "rescored_from_cache": bool(carried),
         "questions": q_rows, "claims": c_rows,
     }  # fmt: skip
     result["question_metrics"] = M.aggregate_by_type(q_rows) if q_rows else {}

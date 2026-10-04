@@ -1,0 +1,328 @@
+[
+  {
+    "id": "q004",
+    "question": "On what date did JPMorgan Chase acquire certain assets and assume certain liabilities of First Republic Bank?",
+    "answer": "JPMorgan Chase acquired certain assets and assumed certain liabilities of First Republic Bank on May 1, 2023.",
+    "cited": [
+      "jpm_fy2024:p60:c0",
+      "jpm_fy2025:p314:c0",
+      "jpm_fy2024:p321:c0",
+      "jpm_fy2024:p54:c2"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q017",
+    "question": "What were Wells Fargo's total assets at December 31, 2025?",
+    "answer": "Wells Fargo's total assets at December 31, 2025, were approximately $2.1 trillion.",
+    "cited": [
+      "wfc_fy2025:p16:c0"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q012",
+    "question": "What was Bank of America's net income for 2025?",
+    "answer": "Bank of America's net income for 2025 was $30.5 billion.",
+    "cited": [
+      "bac_fy2025:p29:c1",
+      "bac_fy2025:p29:c5",
+      "bac_fy2025:p172:c5"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q020",
+    "question": "What was Wells Fargo's provision for credit losses in 2025?",
+    "answer": "Wells Fargo's provision for credit losses in 2025 was $3.7 billion.",
+    "cited": [
+      "wfc_fy2025:p19:c0",
+      "wfc_fy2025:p4:c0",
+      "wfc_fy2025:p16:c2"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q006",
+    "question": "What quarterly common stock dividend per share did JPMorgan Chase's Board declare in December 2025?",
+    "answer": "JPMorgan Chase's Board of Directors declared a quarterly common stock dividend of $1.50 per share in December 2025.",
+    "cited": [
+      "jpm_fy2025:p99:c0"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q001",
+    "question": "How many employees did JPMorgan Chase have in North America at December 31, 2025?",
+    "answer": "JPMorgan Chase had 185,208 employees in North America as of December 31, 2025.",
+    "cited": [
+      "jpm_fy2025:p9:c1"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q008",
+    "question": "What is Citi's current GSIB surcharge used in calculating its required regulatory CET1 Capital ratio under the Standardized Approach?",
+    "answer": "Citi's current GSIB surcharge used in calculating its required regulatory CET1 Capital ratio under the Standardized Approach is 3.5% as of 2024 and 2025.",
+    "cited": [
+      "c_fy2025:p38:c2",
+      "c_fy2024:p33:c2",
+      "c_fy2024:p34:c0"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q025",
+    "question": "Which of JPMorgan Chase, Bank of America, Citigroup and Wells Fargo reported the largest total assets at year-end 2025?",
+    "answer": "JPMorgan Chase reported the largest total assets at year-end 2025, with $4.4 trillion in assets. Wells Fargo reported approximately $2.1 trillion in assets at the same date. There is no information provided about Bank of America or Citigroup's total assets in the excerpts.",
+    "cited": [
+      "wfc_fy2025:p16:c0",
+      "jpm_fy2025:p48:c0",
+      "jpm_fy2025:p3:c0"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q022",
+    "question": "What was Citigroup's CET1 Capital ratio under the Basel III Standardized Approach at December 31, 2025?",
+    "answer": "Citigroup's Common Equity Tier 1 (CET1) Capital ratio under the Basel III Standardized Approach was 13.2% as of December 31, 2025.",
+    "cited": [
+      "c_fy2025:p41:c4",
+      "c_fy2025:p9:c0"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q021",
+    "question": "What was JPMorgan Chase's Standardized CET1 capital ratio at December 31, 2025?",
+    "answer": "JPMorgan Chase's Standardized CET1 capital ratio at December 31, 2025 was 11.5%.",
+    "cited": [
+      "jpm_fy2025:p295:c0",
+      "jpm_fy2025:p295:c1"
+    ],
+    "judge_correct": 0.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q027",
+    "question": "Which had the higher Standardized CET1 ratio at December 31, 2025, JPMorgan Chase or Citigroup?",
+    "answer": "Citigroup had the higher Standardized CET1 ratio at December 31, 2025, with 13.2%, compared to JPMorgan Chase's minimum required CET1 ratio of 11.5% under the Standardized approach. The exact JPMorgan Chase CET1 ratio is not provided, but Citigroup's ratio exceeds the regulatory minimum and is explicitly stated as 13.2%.",
+    "cited": [
+      "c_fy2025:p41:c4",
+      "jpm_fy2025:p295:c0"
+    ],
+    "judge_correct": 0.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q029",
+    "question": "Which had more employees at year-end 2025, Wells Fargo or Bank of America?",
+    "answer": "Wells Fargo had more employees at year-end 2025, with over 205,000 employees worldwide. The number of employees for Bank of America at year-end 2025 is not provided in the excerpts.",
+    "cited": [
+      "wfc_fy2025:p12:c0"
+    ],
+    "judge_correct": 0.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q005",
+    "question": "Approximately how many employees were included in Citi's divestiture of its remaining Russian business operations?",
+    "answer": "Approximately 800 employees were included in Citi's divestiture of its remaining Russian business operations.",
+    "cited": [
+      "c_fy2025:p11:c0"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q003",
+    "question": "In which month and year did the Federal Reserve lift the asset cap on Wells Fargo?",
+    "answer": "The Federal Reserve lifted the asset cap on Wells Fargo in June 2025.",
+    "cited": [
+      "wfc_fy2025:p3:c0",
+      "wfc_fy2025:p7:c1"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q026",
+    "question": "How did Wells Fargo's net income for 2025 compare with 2024?",
+    "answer": "Wells Fargo's net income for 2025 was $21.3 billion, which increased compared with $19.7 billion in 2024.",
+    "cited": [
+      "wfc_fy2025:p19:c0",
+      "wfc_fy2025:p183:c1"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q007",
+    "question": "In how many states does Bank of America operate financial centers (besides the District of Columbia)?",
+    "answer": "As of December 31, 2025, Bank of America operates financial centers in 38 states. As of December 31, 2024, Bank of America operated financial centers in 39 states.",
+    "cited": [
+      "bac_fy2025:p39:c4",
+      "bac_fy2024:p38:c5"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q013",
+    "question": "What was Citigroup's net income for 2025?",
+    "answer": "Citigroup's net income for 2025 was $14.3 billion.",
+    "cited": [
+      "c_fy2025:p8:c0",
+      "c_fy2025:p16:c3",
+      "c_fy2025:p140:c1",
+      "c_fy2025:p135:c2"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q024",
+    "question": "Did Citigroup's net income increase or decrease from 2024 to 2025?",
+    "answer": "Citigroup's net income increased from $12.7 billion in 2024 to $14.3 billion in 2025.",
+    "cited": [
+      "c_fy2024:p7:c3",
+      "c_fy2025:p8:c0"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q011",
+    "question": "What was JPMorgan Chase's net income for 2025?",
+    "answer": "JPMorgan Chase's net income for 2025 was $57.0 billion.",
+    "cited": [
+      "jpm_fy2025:p49:c1"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q030",
+    "question": "Which reported higher net income for 2025, Citigroup or Wells Fargo?",
+    "answer": "Wells Fargo reported higher net income for 2025, with $21.3 billion compared to Citigroup's $14.3 billion.",
+    "cited": [
+      "c_fy2025:p8:c0",
+      "wfc_fy2025:p19:c0",
+      "c_fy2025:p135:c2"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q018",
+    "question": "What was JPMorgan Chase's net interest income for 2025?",
+    "answer": "JPMorgan Chase's net interest income for 2025 was $95.4 billion.",
+    "cited": [
+      "jpm_fy2025:p49:c1"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q019",
+    "question": "What was Citigroup's net interest income for 2024?",
+    "answer": "Citigroup's net interest income for 2024 was $54.1 billion on a reported basis and $54.2 billion on a taxable equivalent basis.",
+    "cited": [
+      "c_fy2024:p7:c3",
+      "c_fy2024:p109:c2"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q009",
+    "question": "What was Wells Fargo's headcount at the end of 2025?",
+    "answer": "Wells Fargo had a headcount of over 205,000 employees worldwide at the end of 2025.",
+    "cited": [
+      "wfc_fy2025:p12:c0"
+    ],
+    "judge_correct": 0.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q002",
+    "question": "Approximately how many employees did Bank of America employ at both December 31, 2025 and 2024?",
+    "answer": "Bank of America employed approximately 213,000 employees at both December 31, 2025 and 2024.",
+    "cited": [
+      "bac_fy2025:p5:c0",
+      "bac_fy2024:p5:c0"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  },
+  {
+    "id": "q015",
+    "question": "What were JPMorgan Chase's total assets at December 31, 2025?",
+    "answer": "JPMorgan Chase's total assets were $4.4 trillion as of December 31, 2025.",
+    "cited": [
+      "jpm_fy2025:p3:c0",
+      "jpm_fy2025:p48:c0"
+    ],
+    "judge_correct": 1.0,
+    "judge_faithfulness": 1.0,
+    "human_correct": null,
+    "human_faithful": null
+  }
+]

@@ -1,0 +1,3067 @@
+{
+  "name": "03_hybrid",
+  "config": {
+    "name": "03_hybrid",
+    "parser": "pymupdf",
+    "chunking": {
+      "strategy": "section_table",
+      "chunk_size": 512,
+      "overlap": 64,
+      "contextual_header": false
+    },
+    "embedding": {
+      "provider": "openai",
+      "model": "text-embedding-3-small"
+    },
+    "retrieval": {
+      "mode": "hybrid",
+      "top_k": 5,
+      "candidate_k": 30,
+      "rrf_k": 60,
+      "metadata_filter": false
+    },
+    "rerank": {
+      "enabled": false,
+      "model": "BAAI/bge-reranker-base"
+    },
+    "llm": {
+      "provider": "openai",
+      "model": "gpt-4.1-mini",
+      "temperature": 0.0,
+      "max_tokens": 600,
+      "price_in": 0.4,
+      "price_out": 1.6,
+      "embed_price": 0.02
+    },
+    "manifest_path": "data/manifest.yaml",
+    "raw_dir": "data/raw",
+    "index_dir": "indexes",
+    "cache_path": "cache/cache.sqlite",
+    "log_dir": "logs"
+  },
+  "git_commit": "4381f58-dirty",
+  "timestamp": "2026-10-03T22:51:20",
+  "judge": true,
+  "retrieval_only": false,
+  "n_questions": 40,
+  "n_claims": 30,
+  "cost_usd": 0.0735,
+  "wall_seconds": 1.6624541282653809,
+  "questions": [
+    {
+      "id": "q001",
+      "type": "factual",
+      "question": "How many employees did JPMorgan Chase have in North America at December 31, 2025?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          3
+        ],
+        [
+          "jpm_fy2025",
+          401
+        ],
+        [
+          "jpm_fy2024",
+          3
+        ],
+        [
+          "jpm_fy2024",
+          427
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 420.247375004692,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": null,
+      "answer_correct": 0.0
+    },
+    {
+      "id": "q002",
+      "type": "factual",
+      "question": "Approximately how many employees did Bank of America employ at both December 31, 2025 and 2024?",
+      "answer": "Bank of America employed approximately 213,000 employees at both December 31, 2024 and December 31, 2025.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "bac_fy2024",
+          5
+        ],
+        [
+          "bac_fy2025",
+          5
+        ],
+        [
+          "bac_fy2024",
+          29
+        ],
+        [
+          "bac_fy2025",
+          29
+        ],
+        [
+          "bac_fy2025",
+          119
+        ]
+      ],
+      "cited": [
+        "bac_fy2024:p29:c1",
+        "bac_fy2025:p29:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 25.52179199119564,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 0.5,
+      "citation_precision": 0.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q003",
+      "type": "factual",
+      "question": "In which month and year did the Federal Reserve lift the asset cap on Wells Fargo?",
+      "answer": "The Federal Reserve lifted the asset cap on Wells Fargo in June 2025.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "wfc_fy2024",
+          11
+        ],
+        [
+          "wfc_fy2025",
+          3
+        ],
+        [
+          "wfc_fy2025",
+          187
+        ],
+        [
+          "wfc_fy2025",
+          3
+        ],
+        [
+          "wfc_fy2025",
+          8
+        ]
+      ],
+      "cited": [
+        "wfc_fy2025:p3:c0",
+        "wfc_fy2025:p3:c2"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 23.008042000583373,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 0.5,
+      "citation_precision": 1.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q004",
+      "type": "factual",
+      "question": "On what date did JPMorgan Chase acquire certain assets and assume certain liabilities of First Republic Bank?",
+      "answer": "JPMorgan Chase acquired certain assets and assumed certain liabilities of First Republic Bank on May 1, 2023.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "jpm_fy2024",
+          60
+        ],
+        [
+          "jpm_fy2024",
+          54
+        ],
+        [
+          "jpm_fy2024",
+          56
+        ],
+        [
+          "jpm_fy2024",
+          321
+        ],
+        [
+          "jpm_fy2025",
+          314
+        ]
+      ],
+      "cited": [
+        "jpm_fy2024:p60:c0",
+        "jpm_fy2024:p54:c2",
+        "jpm_fy2024:p321:c0",
+        "jpm_fy2025:p314:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 23.617416009074077,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.2,
+      "citation_precision": 0.25,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q005",
+      "type": "factual",
+      "question": "Approximately how many employees were included in Citi's divestiture of its remaining Russian business operations?",
+      "answer": "Approximately 800 employees were included in Citi's divestiture of its remaining Russian business operations.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "c_fy2025",
+          119
+        ],
+        [
+          "c_fy2025",
+          11
+        ],
+        [
+          "c_fy2024",
+          126
+        ],
+        [
+          "c_fy2024",
+          126
+        ],
+        [
+          "c_fy2024",
+          125
+        ]
+      ],
+      "cited": [
+        "c_fy2025:p11:c0",
+        "c_fy2025:p119:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 25.141707999864593,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 0.5,
+      "citation_precision": 0.5,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q006",
+      "type": "factual",
+      "question": "What quarterly common stock dividend per share did JPMorgan Chase's Board declare in December 2025?",
+      "answer": "JPMorgan Chase's Board of Directors declared a quarterly common stock dividend of $1.50 per share in December 2025.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          285
+        ],
+        [
+          "jpm_fy2025",
+          287
+        ],
+        [
+          "jpm_fy2025",
+          99
+        ],
+        [
+          "jpm_fy2024",
+          293
+        ],
+        [
+          "jpm_fy2024",
+          107
+        ]
+      ],
+      "cited": [
+        "jpm_fy2025:p99:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 21.82791699306108,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 0.3333333333333333,
+      "citation_precision": 1.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q007",
+      "type": "factual",
+      "question": "In how many states does Bank of America operate financial centers (besides the District of Columbia)?",
+      "answer": "Bank of America operates financial centers in all major markets in the U.S., covering all states except the District of Columbia. Since the U.S. has 50 states and the District of Columbia is excluded, Bank of America operates financial centers in 50 states.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "bac_fy2024",
+          29
+        ],
+        [
+          "bac_fy2024",
+          3
+        ],
+        [
+          "bac_fy2025",
+          142
+        ],
+        [
+          "bac_fy2025",
+          3
+        ],
+        [
+          "bac_fy2025",
+          279
+        ]
+      ],
+      "cited": [
+        "bac_fy2024:p29:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 22.42491699871607,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": 0.0,
+      "answer_correct": 0.0,
+      "faithfulness": 0.0
+    },
+    {
+      "id": "q008",
+      "type": "factual",
+      "question": "What is Citi's current GSIB surcharge used in calculating its required regulatory CET1 Capital ratio under the Standardized Approach?",
+      "answer": "Citi's current GSIB surcharge used in calculating its required regulatory CET1 Capital ratio under the Standardized Approach is 3.5%.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "c_fy2024",
+          37
+        ],
+        [
+          "c_fy2025",
+          38
+        ],
+        [
+          "jpm_fy2024",
+          102
+        ],
+        [
+          "c_fy2024",
+          35
+        ],
+        [
+          "c_fy2024",
+          35
+        ]
+      ],
+      "cited": [
+        "c_fy2024:p37:c2",
+        "c_fy2024:p35:c0",
+        "c_fy2024:p35:c2"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 25.387166999280453,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 0.5,
+      "citation_precision": 0.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q009",
+      "type": "factual",
+      "question": "What was Wells Fargo's headcount at the end of 2025?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "wfc_fy2024",
+          8
+        ],
+        [
+          "wfc_fy2025",
+          16
+        ],
+        [
+          "wfc_fy2024",
+          11
+        ],
+        [
+          "wfc_fy2025",
+          3
+        ],
+        [
+          "wfc_fy2025",
+          8
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 17.004124994855374,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": null,
+      "answer_correct": 0.0
+    },
+    {
+      "id": "q010",
+      "type": "factual",
+      "question": "What were JPMorgan Chase's cash dividends declared per share for 2025?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          331
+        ],
+        [
+          "jpm_fy2024",
+          337
+        ],
+        [
+          "jpm_fy2025",
+          285
+        ],
+        [
+          "jpm_fy2024",
+          346
+        ],
+        [
+          "jpm_fy2024",
+          293
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 17.31862500309944,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": null,
+      "answer_correct": 0.0
+    },
+    {
+      "id": "q011",
+      "type": "numeric",
+      "question": "What was JPMorgan Chase's net income for 2025?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          52
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2024",
+          59
+        ],
+        [
+          "c_fy2025",
+          304
+        ],
+        [
+          "jpm_fy2025",
+          49
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 14.545875004841946,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.2,
+      "citation_precision": null,
+      "answer_correct": 0.0
+    },
+    {
+      "id": "q012",
+      "type": "numeric",
+      "question": "What was Bank of America's net income for 2025?",
+      "answer": "Bank of America's net income for 2025 was $30.509 billion.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "bac_fy2025",
+          168
+        ],
+        [
+          "bac_fy2025",
+          106
+        ],
+        [
+          "bac_fy2025",
+          29
+        ],
+        [
+          "bac_fy2025",
+          128
+        ],
+        [
+          "bac_fy2025",
+          36
+        ]
+      ],
+      "cited": [
+        "bac_fy2025:p29:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 16.417541992268525,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.3333333333333333,
+      "citation_precision": 1.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q013",
+      "type": "numeric",
+      "question": "What was Citigroup's net income for 2025?",
+      "answer": "Citigroup's net income for 2025 was $14.3 billion.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "c_fy2024",
+          7
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2025",
+          135
+        ],
+        [
+          "c_fy2025",
+          140
+        ]
+      ],
+      "cited": [
+        "c_fy2025:p8:c1",
+        "c_fy2025:p8:c0",
+        "c_fy2025:p135:c2",
+        "c_fy2025:p140:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 13.837582999258302,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.25,
+      "citation_precision": 0.25,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q014",
+      "type": "numeric",
+      "question": "What was Wells Fargo's net income for 2025?",
+      "answer": "Wells Fargo's net income for 2025 was $21.3 billion.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          17
+        ],
+        [
+          "wfc_fy2025",
+          6
+        ],
+        [
+          "wfc_fy2025",
+          19
+        ],
+        [
+          "wfc_fy2025",
+          16
+        ],
+        [
+          "wfc_fy2025",
+          183
+        ]
+      ],
+      "cited": [
+        "wfc_fy2025:p17:c1",
+        "wfc_fy2025:p19:c0",
+        "wfc_fy2025:p183:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 13.254916993901134,
+      "cost_usd": 0.0,
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 1.0,
+      "citation_precision": 0.3333333333333333,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q015",
+      "type": "numeric",
+      "question": "What were JPMorgan Chase's total assets at December 31, 2025?",
+      "answer": "JPMorgan Chase had $4.4 trillion in total assets as of December 31, 2025.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2024",
+          303
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2025",
+          48
+        ],
+        [
+          "jpm_fy2024",
+          54
+        ]
+      ],
+      "cited": [
+        "jpm_fy2025:p48:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 18.054208005196415,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": 0.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q016",
+      "type": "numeric",
+      "question": "What were Citigroup's total assets at December 31, 2025?",
+      "answer": "Citigroup's quarterly adjusted average total assets at December 31, 2025, were USD 2,685,119 million.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "c_fy2025",
+          229
+        ],
+        [
+          "c_fy2025",
+          43
+        ],
+        [
+          "c_fy2025",
+          42
+        ],
+        [
+          "c_fy2025",
+          14
+        ],
+        [
+          "c_fy2025",
+          159
+        ]
+      ],
+      "cited": [
+        "c_fy2025:p229:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 15.815791994100437,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.25,
+      "citation_precision": 0.0,
+      "answer_correct": 0.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q017",
+      "type": "numeric",
+      "question": "What were Wells Fargo's total assets at December 31, 2025?",
+      "answer": "Wells Fargo's total assets at December 31, 2025 were approximately $2.1 trillion.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          186
+        ],
+        [
+          "wfc_fy2025",
+          61
+        ],
+        [
+          "wfc_fy2025",
+          16
+        ],
+        [
+          "wfc_fy2024",
+          184
+        ],
+        [
+          "wfc_fy2024",
+          57
+        ]
+      ],
+      "cited": [
+        "wfc_fy2025:p16:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 15.86275000590831,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": 0.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q018",
+      "type": "numeric",
+      "question": "What was JPMorgan Chase's net interest income for 2025?",
+      "answer": "JPMorgan Chase's net interest income for 2025 was $95.4 billion.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "jpm_fy2024",
+          59
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2025",
+          52
+        ],
+        [
+          "c_fy2025",
+          304
+        ],
+        [
+          "jpm_fy2025",
+          49
+        ]
+      ],
+      "cited": [
+        "jpm_fy2025:p49:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 14.943250003852881,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.2,
+      "citation_precision": 1.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q019",
+      "type": "numeric",
+      "question": "What was Citigroup's net interest income for 2024?",
+      "answer": "Citigroup's net interest income for 2024 was $54.1 billion.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "c_fy2024",
+          7
+        ],
+        [
+          "c_fy2025",
+          103
+        ],
+        [
+          "c_fy2024",
+          109
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2024",
+          14
+        ]
+      ],
+      "cited": [
+        "c_fy2024:p7:c3",
+        "c_fy2024:p109:c2",
+        "c_fy2024:p14:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 14.494540999294259,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.2,
+      "citation_precision": 0.3333333333333333,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q020",
+      "type": "numeric",
+      "question": "What was Wells Fargo's provision for credit losses in 2025?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "bac_fy2025",
+          128
+        ],
+        [
+          "wfc_fy2025",
+          141
+        ],
+        [
+          "jpm_fy2025",
+          55
+        ],
+        [
+          "bac_fy2024",
+          127
+        ],
+        [
+          "jpm_fy2025",
+          50
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 20.36749999388121,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": null,
+      "answer_correct": 0.0
+    },
+    {
+      "id": "q021",
+      "type": "numeric",
+      "question": "What was JPMorgan Chase's Standardized CET1 capital ratio at December 31, 2025?",
+      "answer": "JPMorgan Chase's Standardized CET1 capital ratio at December 31, 2025 was 13.3%.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2025",
+          295
+        ],
+        [
+          "jpm_fy2024",
+          303
+        ],
+        [
+          "jpm_fy2024",
+          302
+        ],
+        [
+          "jpm_fy2025",
+          295
+        ]
+      ],
+      "cited": [
+        "jpm_fy2025:p296:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 18.039083006442524,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": 0.0,
+      "answer_correct": 0.0,
+      "faithfulness": 0.0
+    },
+    {
+      "id": "q022",
+      "type": "numeric",
+      "question": "What was Citigroup's CET1 Capital ratio under the Basel III Standardized Approach at December 31, 2025?",
+      "answer": "Citigroup's CET1 Capital ratio under the Basel III Standardized Approach was 13.2% as of December 31, 2025.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "c_fy2025",
+          41
+        ],
+        [
+          "c_fy2024",
+          37
+        ],
+        [
+          "c_fy2024",
+          33
+        ],
+        [
+          "c_fy2024",
+          38
+        ],
+        [
+          "c_fy2025",
+          45
+        ]
+      ],
+      "cited": [
+        "c_fy2025:p41:c4"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 20.583292003721,
+      "cost_usd": 0.0,
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "citation_precision": 1.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q023",
+      "type": "comparison",
+      "question": "Which had higher net income for 2025, JPMorgan Chase or Bank of America?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2025",
+          3
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2024",
+          3
+        ],
+        [
+          "jpm_fy2024",
+          303
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 17.882666987134144,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": null,
+      "answer_correct": 0.0
+    },
+    {
+      "id": "q024",
+      "type": "comparison",
+      "question": "Did Citigroup's net income increase or decrease from 2024 to 2025?",
+      "answer": "Citigroup's net income increased from $12.7 billion in 2024 to $14.3 billion in 2025, representing an increase.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "c_fy2024",
+          7
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2024",
+          109
+        ],
+        [
+          "c_fy2025",
+          140
+        ],
+        [
+          "c_fy2024",
+          8
+        ]
+      ],
+      "cited": [
+        "c_fy2024:p7:c3",
+        "c_fy2025:p140:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 18.285583006218076,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": 0.0,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q025",
+      "type": "comparison",
+      "question": "Which of JPMorgan Chase, Bank of America, Citigroup and Wells Fargo reported the largest total assets at year-end 2025?",
+      "answer": "JPMorgan Chase reported the largest total assets at year-end 2025, with $4.4 trillion in assets as of December 31, 2025.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2024",
+          303
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2025",
+          3
+        ],
+        [
+          "jpm_fy2024",
+          3
+        ]
+      ],
+      "cited": [
+        "jpm_fy2025:p3:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 25.95866699994076,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": 0.0,
+      "answer_correct": 1.0,
+      "faithfulness": 0.0
+    },
+    {
+      "id": "q026",
+      "type": "comparison",
+      "question": "How did Wells Fargo's net income for 2025 compare with 2024?",
+      "answer": "Wells Fargo's net income for 2025 was $21.3 billion, which is an increase of $1.6 billion or 8% compared with $19.7 billion in 2024.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "wfc_fy2024",
+          2
+        ],
+        [
+          "wfc_fy2025",
+          17
+        ],
+        [
+          "wfc_fy2024",
+          13
+        ],
+        [
+          "wfc_fy2025",
+          19
+        ],
+        [
+          "wfc_fy2025",
+          183
+        ]
+      ],
+      "cited": [
+        "wfc_fy2025:p17:c1",
+        "wfc_fy2025:p19:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 17.253540994715877,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.5,
+      "citation_precision": 0.5,
+      "answer_correct": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q027",
+      "type": "comparison",
+      "question": "Which had the higher Standardized CET1 ratio at December 31, 2025, JPMorgan Chase or Citigroup?",
+      "answer": "JPMorgan Chase had a Standardized CET1 ratio of 13.3% at December 31, 2025. The excerpts do not provide Citigroup's Standardized CET1 ratio for December 31, 2025, so a comparison cannot be made.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2025",
+          295
+        ],
+        [
+          "jpm_fy2024",
+          303
+        ],
+        [
+          "jpm_fy2024",
+          302
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ]
+      ],
+      "cited": [
+        "jpm_fy2025:p296:c0",
+        "jpm_fy2025:p295:c1",
+        "jpm_fy2025:p296:c4"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 20.001917000627145,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": 0.0,
+      "answer_correct": 0.0,
+      "faithfulness": 0.5
+    },
+    {
+      "id": "q028",
+      "type": "comparison",
+      "question": "Did JPMorgan Chase's total assets grow or shrink between year-end 2024 and year-end 2025?",
+      "answer": "JPMorgan Chase's total assets grew between year-end 2024 and year-end 2025. The Firm had $4.0 trillion in assets as of December 31, 2024 [5]. While the exact total assets figure for year-end 2025 is not explicitly stated in the excerpts, the information implies ongoing business developments and capital metrics that suggest growth rather than shrinkage [1, 3, 4].",
+      "abstain": false,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2024",
+          303
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2025",
+          52
+        ],
+        [
+          "jpm_fy2024",
+          54
+        ]
+      ],
+      "cited": [
+        "jpm_fy2025:p296:c0",
+        "jpm_fy2025:p296:c4",
+        "jpm_fy2025:p52:c0",
+        "jpm_fy2024:p54:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 20.264624996343628,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": 0.0,
+      "answer_correct": 0.0,
+      "faithfulness": 0.5
+    },
+    {
+      "id": "q029",
+      "type": "comparison",
+      "question": "Which had more employees at year-end 2025, Wells Fargo or Bank of America?",
+      "answer": "Wells Fargo had over 205,000 employees worldwide at year-end 2025. The excerpts do not provide the number of employees for Bank of America at year-end 2025, so a direct comparison cannot be made.",
+      "abstain": false,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          12
+        ],
+        [
+          "wfc_fy2025",
+          186
+        ],
+        [
+          "wfc_fy2025",
+          8
+        ],
+        [
+          "wfc_fy2025",
+          16
+        ],
+        [
+          "bac_fy2024",
+          3
+        ]
+      ],
+      "cited": [
+        "wfc_fy2025:p12:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 18.834040994988754,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "citation_precision": 0.0,
+      "answer_correct": 0.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q030",
+      "type": "comparison",
+      "question": "Which reported higher net income for 2025, Citigroup or Wells Fargo?",
+      "answer": "Wells Fargo reported higher net income for 2025, with $21.3 billion compared to Citigroup's $12.7 billion in 2024 (Citigroup's 2025 net income is not provided).",
+      "abstain": false,
+      "retrieved": [
+        [
+          "c_fy2024",
+          7
+        ],
+        [
+          "wfc_fy2025",
+          3
+        ],
+        [
+          "wfc_fy2025",
+          16
+        ],
+        [
+          "wfc_fy2025",
+          17
+        ],
+        [
+          "wfc_fy2025",
+          19
+        ]
+      ],
+      "cited": [
+        "c_fy2024:p7:c3",
+        "wfc_fy2025:p3:c2",
+        "wfc_fy2025:p17:c1",
+        "wfc_fy2025:p19:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 16.382709000026807,
+      "cost_usd": 0.0,
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 0.25,
+      "mrr": 0.3333333333333333,
+      "citation_precision": 0.25,
+      "answer_correct": 0.0,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q031",
+      "type": "unanswerable",
+      "question": "What will JPMorgan's dividend per share be in 2030?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "jpm_fy2024",
+          293
+        ],
+        [
+          "bac_fy2025",
+          228
+        ],
+        [
+          "jpm_fy2025",
+          288
+        ],
+        [
+          "bac_fy2025",
+          226
+        ],
+        [
+          "jpm_fy2025",
+          52
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 14.7995839943178,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    },
+    {
+      "id": "q032",
+      "type": "unanswerable",
+      "question": "What is Bank of America's market share in India?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "bac_fy2024",
+          299
+        ],
+        [
+          "bac_fy2025",
+          306
+        ],
+        [
+          "bac_fy2025",
+          171
+        ],
+        [
+          "bac_fy2024",
+          169
+        ],
+        [
+          "bac_fy2024",
+          3
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 14.532791989040561,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    },
+    {
+      "id": "q033",
+      "type": "unanswerable",
+      "question": "What is Citigroup's expected net income for 2027?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "c_fy2025",
+          294
+        ],
+        [
+          "c_fy2024",
+          309
+        ],
+        [
+          "c_fy2024",
+          7
+        ],
+        [
+          "wfc_fy2024",
+          130
+        ],
+        [
+          "c_fy2025",
+          135
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 14.332584003568627,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    },
+    {
+      "id": "q034",
+      "type": "unanswerable",
+      "question": "How many employees does Wells Fargo have in Brazil?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          8
+        ],
+        [
+          "wfc_fy2025",
+          16
+        ],
+        [
+          "wfc_fy2024",
+          11
+        ],
+        [
+          "wfc_fy2024",
+          196
+        ],
+        [
+          "wfc_fy2025",
+          197
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 13.562334002926946,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    },
+    {
+      "id": "q035",
+      "type": "unanswerable",
+      "question": "What was Goldman Sachs's CET1 ratio at year-end 2025?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "c_fy2025",
+          41
+        ],
+        [
+          "c_fy2024",
+          38
+        ],
+        [
+          "bac_fy2025",
+          52
+        ],
+        [
+          "c_fy2025",
+          44
+        ],
+        [
+          "c_fy2025",
+          40
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 15.951499997754581,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    },
+    {
+      "id": "q036",
+      "type": "unanswerable",
+      "question": "What is the personal net worth of JPMorgan's CEO?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "jpm_fy2024",
+          54
+        ],
+        [
+          "c_fy2025",
+          26
+        ],
+        [
+          "jpm_fy2025",
+          48
+        ],
+        [
+          "c_fy2024",
+          25
+        ],
+        [
+          "jpm_fy2024",
+          56
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 14.80891699611675,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    },
+    {
+      "id": "q037",
+      "type": "unanswerable",
+      "question": "Will Bank of America acquire a regional bank in 2026?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "bac_fy2024",
+          4
+        ],
+        [
+          "bac_fy2025",
+          4
+        ],
+        [
+          "bac_fy2025",
+          171
+        ],
+        [
+          "c_fy2025",
+          293
+        ],
+        [
+          "bac_fy2024",
+          137
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 15.169834005064331,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    },
+    {
+      "id": "q038",
+      "type": "unanswerable",
+      "question": "What was Wells Fargo's net income in 2019?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          17
+        ],
+        [
+          "wfc_fy2024",
+          13
+        ],
+        [
+          "wfc_fy2025",
+          6
+        ],
+        [
+          "wfc_fy2024",
+          181
+        ],
+        [
+          "wfc_fy2025",
+          183
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 13.4079169947654,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    },
+    {
+      "id": "q039",
+      "type": "unanswerable",
+      "question": "What is Citigroup's stock price target for next year?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "c_fy2025",
+          303
+        ],
+        [
+          "c_fy2025",
+          179
+        ],
+        [
+          "c_fy2024",
+          318
+        ],
+        [
+          "c_fy2024",
+          179
+        ],
+        [
+          "c_fy2024",
+          15
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 16.030832994147204,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    },
+    {
+      "id": "q040",
+      "type": "unanswerable",
+      "question": "How many customers did JPMorgan lose to cryptocurrency exchanges in 2025?",
+      "answer": null,
+      "abstain": true,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          30
+        ],
+        [
+          "jpm_fy2024",
+          33
+        ],
+        [
+          "jpm_fy2024",
+          33
+        ],
+        [
+          "jpm_fy2025",
+          304
+        ],
+        [
+          "jpm_fy2024",
+          20
+        ]
+      ],
+      "cited": [],
+      "invalid_citations": 0,
+      "latency_ms": 19.37054199515842,
+      "cost_usd": 0.0,
+      "answer_correct": 1.0
+    }
+  ],
+  "claims": [
+    {
+      "id": "c001",
+      "claim": "JPMorgan's net income was $57.0 billion in 2025.",
+      "gold": "SUPPORTED",
+      "perturbation": "none",
+      "pred": "SUPPORTED",
+      "explanation": "Excerpt [1] explicitly states that JPMorgan Chase reported net income of $57.0 billion for 2025.",
+      "evidence": [
+        "jpm_fy2025:p49:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 14.30887499009259,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          49
+        ],
+        [
+          "jpm_fy2024",
+          91
+        ],
+        [
+          "jpm_fy2025",
+          49
+        ],
+        [
+          "jpm_fy2025",
+          83
+        ],
+        [
+          "jpm_fy2025",
+          52
+        ]
+      ],
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 1.0
+    },
+    {
+      "id": "c002",
+      "claim": "The Federal Reserve lifted Wells Fargo's asset cap in June 2025.",
+      "gold": "SUPPORTED",
+      "perturbation": "none",
+      "pred": "SUPPORTED",
+      "explanation": "Excerpt [1] explicitly states that the Federal Reserve lifted Wells Fargo's asset cap in June 2025, marking a critical milestone in the company's transformation.",
+      "evidence": [
+        "wfc_fy2025:p3:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 16.39374998921994,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          3
+        ],
+        [
+          "wfc_fy2024",
+          11
+        ],
+        [
+          "wfc_fy2025",
+          187
+        ],
+        [
+          "wfc_fy2025",
+          16
+        ],
+        [
+          "wfc_fy2024",
+          185
+        ]
+      ],
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 0.6666666666666666,
+      "mrr": 1.0
+    },
+    {
+      "id": "c003",
+      "claim": "Citigroup's CET1 Capital ratio under the Basel III Standardized Approach was 13.2% at December 31, 2025.",
+      "gold": "SUPPORTED",
+      "perturbation": "none",
+      "pred": "SUPPORTED",
+      "explanation": "Excerpt [1] explicitly states that Citigroup\u2019s CET1 Capital ratio under the Basel III Standardized Approach was 13.2% as of December 31, 2025.",
+      "evidence": [
+        "c_fy2025:p41:c4"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 21.812542006955482,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "c_fy2025",
+          41
+        ],
+        [
+          "c_fy2024",
+          38
+        ],
+        [
+          "c_fy2024",
+          37
+        ],
+        [
+          "c_fy2024",
+          33
+        ],
+        [
+          "c_fy2025",
+          45
+        ]
+      ],
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "c004",
+      "claim": "Bank of America employed approximately 213,000 employees at the end of 2025.",
+      "gold": "SUPPORTED",
+      "perturbation": "none",
+      "pred": "SUPPORTED",
+      "explanation": "Excerpt [5] states that at December 31, 2025, Bank of America employed approximately 213,000 employees.",
+      "evidence": [
+        "bac_fy2025:p5:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 17.976167000597343,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "bac_fy2024",
+          29
+        ],
+        [
+          "bac_fy2024",
+          5
+        ],
+        [
+          "bac_fy2025",
+          5
+        ],
+        [
+          "bac_fy2024",
+          137
+        ],
+        [
+          "bac_fy2025",
+          5
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "c005",
+      "claim": "JPMorgan declared cash dividends of $5.80 per share in 2025.",
+      "gold": "SUPPORTED",
+      "perturbation": "none",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The excerpts provide detailed information about JPMorgan Chase's preferred stock dividends and common stock authorization, but none explicitly state the amount of cash dividends declared per share for 2025. The excerpts mention dividend declarations for preferred stock but do not specify a $5.80 per share dividend for any stock type in 2025.",
+      "evidence": [
+        "jpm_fy2025:p285:c0",
+        "jpm_fy2024:p293:c0",
+        "jpm_fy2025:p287:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 15.59041699510999,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          285
+        ],
+        [
+          "bac_fy2024",
+          143
+        ],
+        [
+          "jpm_fy2024",
+          293
+        ],
+        [
+          "bac_fy2025",
+          145
+        ],
+        [
+          "jpm_fy2025",
+          287
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c006",
+      "claim": "Citigroup's net income increased in 2025 compared with 2024.",
+      "gold": "SUPPORTED",
+      "perturbation": "none",
+      "pred": "SUPPORTED",
+      "explanation": "Excerpt [4] states that Citigroup reported net income of $14.3 billion in 2025, compared to net income of $12.7 billion in 2024, indicating an increase in net income in 2025 compared with 2024.",
+      "evidence": [
+        "c_fy2024:p7:c3",
+        "c_fy2025:p8:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 14.803917001700029,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "c_fy2024",
+          7
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2024",
+          8
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2024",
+          19
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c007",
+      "claim": "Wells Fargo's CET1 ratio was 10.61% at December 31, 2025.",
+      "gold": "SUPPORTED",
+      "perturbation": "none",
+      "pred": "SUPPORTED",
+      "explanation": "Excerpt [3] shows a table with Wells Fargo & Company's Common Equity Tier 1 (CET1) capital ratio as 10.61% at December 31, 2025, which matches the claim exactly. Excerpt [2] also lists CET1 values consistent with this data.",
+      "evidence": [
+        "wfc_fy2025:p18:c3",
+        "wfc_fy2025:p186:c2"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 16.43920800415799,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          186
+        ],
+        [
+          "wfc_fy2025",
+          18
+        ],
+        [
+          "wfc_fy2025",
+          186
+        ],
+        [
+          "wfc_fy2024",
+          14
+        ],
+        [
+          "wfc_fy2025",
+          186
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c008",
+      "claim": "JPMorgan's net income was $62.5 billion in 2025.",
+      "gold": "REFUTED",
+      "perturbation": "number",
+      "pred": "REFUTED",
+      "explanation": "Excerpt [2] states that JPMorgan Chase reported net income of $57.0 billion for 2025, which contradicts the claim of $62.5 billion. Excerpt [3] shows a different segment's net income but does not support the claim of $62.5 billion total net income.",
+      "evidence": [
+        "jpm_fy2025:p49:c1",
+        "jpm_fy2025:p83:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 14.15524999902118,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "jpm_fy2024",
+          91
+        ],
+        [
+          "jpm_fy2025",
+          49
+        ],
+        [
+          "jpm_fy2025",
+          83
+        ],
+        [
+          "jpm_fy2025",
+          49
+        ],
+        [
+          "c_fy2025",
+          103
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.5
+    },
+    {
+      "id": "c009",
+      "claim": "Bank of America's net income was $35.2 billion in 2025.",
+      "gold": "REFUTED",
+      "perturbation": "number",
+      "pred": "REFUTED",
+      "explanation": "Excerpt [1] provides Bank of America's net income for 2025 as $30.509 billion, which contradicts the claim of $35.2 billion.",
+      "evidence": [
+        "bac_fy2025:p29:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 17.268291994696483,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "bac_fy2025",
+          29
+        ],
+        [
+          "bac_fy2025",
+          128
+        ],
+        [
+          "bac_fy2025",
+          39
+        ],
+        [
+          "bac_fy2024",
+          46
+        ],
+        [
+          "bac_fy2025",
+          36
+        ]
+      ],
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 1.0
+    },
+    {
+      "id": "c010",
+      "claim": "Citigroup's CET1 Capital ratio under the Standardized Approach was 15.4% at December 31, 2025.",
+      "gold": "REFUTED",
+      "perturbation": "number",
+      "pred": "REFUTED",
+      "explanation": "Excerpt [1] states that Citigroup's CET1 Capital ratio under the Basel III Standardized Approach was 13.2% as of December 31, 2025, which contradicts the claim of 15.4%.",
+      "evidence": [
+        "c_fy2025:p41:c4"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 19.72233399283141,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "c_fy2025",
+          41
+        ],
+        [
+          "c_fy2024",
+          38
+        ],
+        [
+          "c_fy2024",
+          37
+        ],
+        [
+          "c_fy2024",
+          37
+        ],
+        [
+          "bac_fy2025",
+          52
+        ]
+      ],
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "c011",
+      "claim": "Wells Fargo had approximately 250,000 employees at the end of 2025.",
+      "gold": "REFUTED",
+      "perturbation": "number",
+      "pred": "REFUTED",
+      "explanation": "The excerpts provide multiple employee counts for Wells Fargo in 2025, all significantly lower than 250,000. Excerpt [4] states the company has over 205,000 employees worldwide, and excerpt [5] mentions more than 200,000 partners. Excerpt [1] notes nearly 90,000 employees received a special payment, consistent with the total employee count being around 200,000. There is no support for the claim of approximately 250,000 employees.",
+      "evidence": [
+        "wfc_fy2025:p8:c0",
+        "wfc_fy2025:p12:c0",
+        "wfc_fy2025:p3:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 16.67849998921156,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          8
+        ],
+        [
+          "wfc_fy2025",
+          16
+        ],
+        [
+          "wfc_fy2024",
+          11
+        ],
+        [
+          "wfc_fy2025",
+          12
+        ],
+        [
+          "wfc_fy2025",
+          3
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c012",
+      "claim": "JPMorgan's cash dividends declared per share were $3.20 in 2025.",
+      "gold": "REFUTED",
+      "perturbation": "number",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The excerpts provide detailed information about JPMorgan Chase's preferred stock and common stock authorizations and some dividend declarations, but none explicitly state the cash dividends declared per share for JPMorgan Chase common stock in 2025. Therefore, there is insufficient information to confirm or refute the claim that JPMorgan's cash dividends declared per share were $3.20 in 2025.",
+      "evidence": [
+        "jpm_fy2025:p285:c0",
+        "jpm_fy2024:p293:c0",
+        "jpm_fy2025:p287:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 16.3203750125831,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          285
+        ],
+        [
+          "bac_fy2025",
+          144
+        ],
+        [
+          "jpm_fy2024",
+          293
+        ],
+        [
+          "wfc_fy2025",
+          183
+        ],
+        [
+          "jpm_fy2025",
+          287
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c013",
+      "claim": "Wells Fargo's total assets were $2.9 trillion at year-end 2025.",
+      "gold": "REFUTED",
+      "perturbation": "number",
+      "pred": "REFUTED",
+      "explanation": "Excerpt [1] states that Wells Fargo had approximately $2.1 trillion in assets at year-end 2025, which contradicts the claim of $2.9 trillion. Excerpt [5] also shows total liabilities and equity of about $2.15 trillion at December 31, 2025, supporting the lower asset figure.",
+      "evidence": [
+        "wfc_fy2025:p16:c0",
+        "wfc_fy2025:p93:c4"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 18.01312500901986,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          16
+        ],
+        [
+          "wfc_fy2024",
+          11
+        ],
+        [
+          "wfc_fy2025",
+          186
+        ],
+        [
+          "wfc_fy2025",
+          61
+        ],
+        [
+          "wfc_fy2025",
+          93
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 0.2
+    },
+    {
+      "id": "c014",
+      "claim": "Wells Fargo's net income fell in 2025.",
+      "gold": "REFUTED",
+      "perturbation": "number",
+      "pred": "REFUTED",
+      "explanation": "The excerpts show that Wells Fargo's net income increased from 19,722 million in 2024 to 21,338 million in 2025, indicating that net income did not fall but rather rose in 2025.",
+      "evidence": [
+        "wfc_fy2025:p17:c1",
+        "wfc_fy2025:p183:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 13.067833991954103,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          17
+        ],
+        [
+          "wfc_fy2025",
+          91
+        ],
+        [
+          "wfc_fy2025",
+          92
+        ],
+        [
+          "wfc_fy2024",
+          13
+        ],
+        [
+          "wfc_fy2025",
+          183
+        ]
+      ],
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "c015",
+      "claim": "The Federal Reserve lifted Wells Fargo's asset cap in June 2023.",
+      "gold": "REFUTED",
+      "perturbation": "year",
+      "pred": "REFUTED",
+      "explanation": "Excerpt [1] states that the Federal Reserve lifted Wells Fargo's asset cap in June 2025, not June 2023. Excerpt [2] confirms the asset cap was in place since 2018 and still in effect as of 2024, implying it was not lifted in 2023.",
+      "evidence": [
+        "wfc_fy2025:p3:c0",
+        "wfc_fy2024:p11:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 16.299542010528967,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          3
+        ],
+        [
+          "wfc_fy2024",
+          11
+        ],
+        [
+          "wfc_fy2024",
+          57
+        ],
+        [
+          "wfc_fy2024",
+          185
+        ],
+        [
+          "wfc_fy2024",
+          11
+        ]
+      ],
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "recall@5": 0.6666666666666666,
+      "mrr": 1.0
+    },
+    {
+      "id": "c016",
+      "claim": "JPMorgan acquired certain assets and liabilities of First Republic Bank on May 1, 2021.",
+      "gold": "REFUTED",
+      "perturbation": "year",
+      "pred": "REFUTED",
+      "explanation": "The excerpts clearly state that JPMorgan Chase acquired certain assets and assumed certain liabilities of First Republic Bank on May 1, 2023, not 2021. This is confirmed in multiple excerpts (1, 2, 3, 4, 5).",
+      "evidence": [
+        "jpm_fy2024:p60:c0",
+        "jpm_fy2024:p54:c2",
+        "jpm_fy2024:p321:c0",
+        "jpm_fy2025:p314:c0",
+        "jpm_fy2024:p321:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 19.870333999278955,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "jpm_fy2024",
+          60
+        ],
+        [
+          "jpm_fy2024",
+          54
+        ],
+        [
+          "jpm_fy2024",
+          321
+        ],
+        [
+          "jpm_fy2025",
+          314
+        ],
+        [
+          "jpm_fy2024",
+          321
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.25
+    },
+    {
+      "id": "c017",
+      "claim": "Citigroup's net income for 2024 was $14.3 billion.",
+      "gold": "REFUTED",
+      "perturbation": "year",
+      "pred": "REFUTED",
+      "explanation": "The excerpts show that Citigroup's net income for 2024 was $12.7 billion (Excerpt 1), while the net income of $14.3 billion corresponds to 2025 (Excerpts 4 and 5). Therefore, the claim that Citigroup's net income for 2024 was $14.3 billion is contradicted by the provided information.",
+      "evidence": [
+        "c_fy2024:p7:c3",
+        "c_fy2025:p8:c0",
+        "c_fy2025:p294:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 15.865708002820611,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "c_fy2024",
+          7
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2024",
+          8
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2025",
+          294
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c018",
+      "claim": "JPMorgan's total assets were $4.0 trillion at year-end 2025.",
+      "gold": "REFUTED",
+      "perturbation": "year",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "Excerpt [1] provides JPMorgan Chase's total assets at year-end 2025 as $4,424,900 million, which is $4.425 trillion, not $4.0 trillion. The claim states $4.0 trillion, which is lower than the reported figure. There is no excerpt that states total assets exactly as $4.0 trillion at year-end 2025. Therefore, the claim is not supported by the excerpts.",
+      "evidence": [
+        "jpm_fy2025:p46:c2"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 17.708500003209338,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          46
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2025",
+          287
+        ],
+        [
+          "jpm_fy2024",
+          88
+        ],
+        [
+          "bac_fy2025",
+          46
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c019",
+      "claim": "Bank of America's net income was $57.0 billion in 2025.",
+      "gold": "REFUTED",
+      "perturbation": "bank",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The provided excerpts include detailed information about Bank of America's allowance for credit losses, provision for credit losses, net charge-offs, noninterest income, dividends from subsidiaries, and segment revenues for 2024 and 2025. However, none of the excerpts provide the total net income figure for Bank of America in 2025, so the claim that net income was $57.0 billion in 2025 cannot be confirmed or refuted based on the available information.",
+      "evidence": [
+        "bac_fy2025:p128:c1",
+        "bac_fy2025:p106:c4",
+        "bac_fy2025:p168:c1",
+        "bac_fy2024:p146:c5",
+        "bac_fy2024:p40:c5"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 16.453874995931983,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "bac_fy2025",
+          128
+        ],
+        [
+          "bac_fy2025",
+          106
+        ],
+        [
+          "bac_fy2025",
+          168
+        ],
+        [
+          "bac_fy2024",
+          146
+        ],
+        [
+          "bac_fy2024",
+          40
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c020",
+      "claim": "Wells Fargo's Standardized CET1 ratio was 14.6% at the end of 2025.",
+      "gold": "REFUTED",
+      "perturbation": "bank",
+      "pred": "REFUTED",
+      "explanation": "Excerpt [3] provides Wells Fargo's Standardized Approach Common Equity Tier 1 (CET1) capital ratios for FY2025, showing values of 10.61%, 11.07%, and 11.43% (likely for different quarters or periods within 2025). None of these values are close to 14.6%. Therefore, the claim that Wells Fargo's Standardized CET1 ratio was 14.6% at the end of 2025 is contradicted by the provided data.",
+      "evidence": [
+        "wfc_fy2025:p18:c3"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 19.10279199364595,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          186
+        ],
+        [
+          "c_fy2024",
+          38
+        ],
+        [
+          "wfc_fy2025",
+          18
+        ],
+        [
+          "wfc_fy2024",
+          14
+        ],
+        [
+          "wfc_fy2024",
+          184
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c021",
+      "claim": "Citigroup's net income was $30.5 billion in 2025.",
+      "gold": "REFUTED",
+      "perturbation": "bank",
+      "pred": "REFUTED",
+      "explanation": "The excerpts provide multiple figures for Citigroup's net income in 2025, none of which approach $30.5 billion. Excerpt [2] states net income was $14.3 billion in 2025, and excluding notable items, net income was $16.1 billion. Excerpt [3] confirms net income of $14.3 billion in 2025. There is no support for a net income of $30.5 billion in 2025.",
+      "evidence": [
+        "c_fy2025:p8:c1",
+        "c_fy2025:p8:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 14.573833992471918,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "c_fy2024",
+          7
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2025",
+          8
+        ],
+        [
+          "c_fy2024",
+          8
+        ],
+        [
+          "c_fy2025",
+          103
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "c022",
+      "claim": "JPMorgan's net interest income was $47.5 billion in 2025.",
+      "gold": "REFUTED",
+      "perturbation": "bank",
+      "pred": "REFUTED",
+      "explanation": "The excerpts provide net interest income figures for JPMorgan Chase and Wells Fargo for 2025. Wells Fargo's net interest income was $47.5 billion in 2025 (Excerpt 1), but JPMorgan Chase's net interest income was $95.4 billion in 2025 (Excerpt 4). Therefore, the claim that JPMorgan's net interest income was $47.5 billion in 2025 is contradicted by the excerpts.",
+      "evidence": [
+        "wfc_fy2025:p4:c0",
+        "jpm_fy2025:p49:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 16.192041992326267,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          4
+        ],
+        [
+          "jpm_fy2024",
+          91
+        ],
+        [
+          "wfc_fy2025",
+          19
+        ],
+        [
+          "jpm_fy2025",
+          49
+        ],
+        [
+          "c_fy2025",
+          103
+        ]
+      ],
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "mrr": 0.25
+    },
+    {
+      "id": "c023",
+      "claim": "Citigroup is about to be acquired by a foreign bank.",
+      "gold": "NOT_ENOUGH_INFO",
+      "perturbation": "unverifiable",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The provided excerpts do not contain any information about Citigroup being acquired or about to be acquired by a foreign bank. There is no mention of acquisition plans or negotiations involving Citigroup and any foreign bank.",
+      "evidence": [
+        "c_fy2025:p288:c2",
+        "c_fy2024:p4:c0",
+        "c_fy2025:p11:c0",
+        "c_fy2024:p39:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 20.02508299483452,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "c_fy2025",
+          288
+        ],
+        [
+          "c_fy2024",
+          4
+        ],
+        [
+          "c_fy2025",
+          11
+        ],
+        [
+          "jpm_fy2024",
+          321
+        ],
+        [
+          "c_fy2024",
+          39
+        ]
+      ]
+    },
+    {
+      "id": "c024",
+      "claim": "Wells Fargo is facing an imminent bank run.",
+      "gold": "NOT_ENOUGH_INFO",
+      "perturbation": "unverifiable",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The provided excerpts from Wells Fargo's annual reports include information about long-term debt and regulatory capital requirements for 2024 and 2025, but none of the excerpts mention or imply anything about a bank run or any imminent liquidity crisis. There is no information about depositor behavior, liquidity stress, or any indicators of a bank run.",
+      "evidence": [
+        "wfc_fy2024:p134:c2",
+        "wfc_fy2025:p135:c2",
+        "wfc_fy2024:p184:c3",
+        "wfc_fy2025:p200:c0",
+        "wfc_fy2025:p186:c3"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 13.513249999959953,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2024",
+          134
+        ],
+        [
+          "wfc_fy2025",
+          135
+        ],
+        [
+          "wfc_fy2024",
+          184
+        ],
+        [
+          "wfc_fy2025",
+          200
+        ],
+        [
+          "wfc_fy2025",
+          186
+        ]
+      ]
+    },
+    {
+      "id": "c025",
+      "claim": "JPMorgan Chase plans to relocate its headquarters out of New York in 2026.",
+      "gold": "NOT_ENOUGH_INFO",
+      "perturbation": "unverifiable",
+      "pred": "REFUTED",
+      "explanation": "The excerpts show that JPMorgan Chase's headquarters was located at 383 Madison Avenue in 2024 (excerpt 1) and moved back to 270 Park Avenue, a 60-story office building, by the end of 2025, which was fully occupied including by senior management (excerpt 2). There is no mention of plans to relocate the headquarters out of New York in 2026; rather, the firm is completing construction and occupying the New York City location at 270 Park Avenue.",
+      "evidence": [
+        "jpm_fy2024:p40:c0",
+        "jpm_fy2025:p34:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 17.311624993453734,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "jpm_fy2024",
+          40
+        ],
+        [
+          "jpm_fy2025",
+          34
+        ],
+        [
+          "jpm_fy2025",
+          296
+        ],
+        [
+          "jpm_fy2024",
+          303
+        ],
+        [
+          "c_fy2025",
+          308
+        ]
+      ]
+    },
+    {
+      "id": "c026",
+      "claim": "Bank of America will cut its dividend next quarter.",
+      "gold": "NOT_ENOUGH_INFO",
+      "perturbation": "unverifiable",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The provided excerpts describe the dividend calculation and distribution methods for Bank of America's depositary shares and preferred stock, but they do not provide any information about whether Bank America will cut its dividend next quarter.",
+      "evidence": [
+        "bac_fy2025:p239:c1",
+        "bac_fy2024:p240:c1"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 15.780542002175935,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "bac_fy2024",
+          169
+        ],
+        [
+          "bac_fy2025",
+          239
+        ],
+        [
+          "bac_fy2025",
+          171
+        ],
+        [
+          "bac_fy2024",
+          240
+        ],
+        [
+          "bac_fy2024",
+          137
+        ]
+      ]
+    },
+    {
+      "id": "c027",
+      "claim": "A major US bank has secretly lost most of its deposits this month.",
+      "gold": "NOT_ENOUGH_INFO",
+      "perturbation": "unverifiable",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The excerpts provide detailed deposit data for Citigroup, Wells Fargo, and Bank of America over recent fiscal years, but none mention a secret or sudden loss of most deposits within a single month. There is no information about any recent or secret deposit losses occurring this month for any major US bank.",
+      "evidence": [
+        "c_fy2025:p93:c6",
+        "wfc_fy2024:p16:c6",
+        "c_fy2025:p298:c3",
+        "bac_fy2024:p4:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 20.066957993549295,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "c_fy2025",
+          93
+        ],
+        [
+          "wfc_fy2024",
+          16
+        ],
+        [
+          "wfc_fy2025",
+          7
+        ],
+        [
+          "c_fy2025",
+          298
+        ],
+        [
+          "bac_fy2024",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "c028",
+      "claim": "Wells Fargo's CEO is resigning next year.",
+      "gold": "NOT_ENOUGH_INFO",
+      "perturbation": "unverifiable",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The provided excerpts include CEO letters from 2024 and 2025, both signed by Charles W. Scharf, with no mention of resignation or plans to leave the company. There is no information about the CEO resigning next year.",
+      "evidence": [
+        "wfc_fy2025:p3:c0",
+        "wfc_fy2024:p8:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 12.572999999974854,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "wfc_fy2025",
+          3
+        ],
+        [
+          "wfc_fy2024",
+          91
+        ],
+        [
+          "wfc_fy2024",
+          88
+        ],
+        [
+          "wfc_fy2024",
+          8
+        ],
+        [
+          "wfc_fy2024",
+          89
+        ]
+      ]
+    },
+    {
+      "id": "c029",
+      "claim": "Citigroup holds large undisclosed losses on cryptocurrency.",
+      "gold": "NOT_ENOUGH_INFO",
+      "perturbation": "unverifiable",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The provided excerpts from Citigroup's annual reports discuss significant accounting policies, risk factors including cybersecurity risks, and contingencies, but do not mention cryptocurrency holdings or any losses related to cryptocurrency. There is no information about whether Citigroup holds cryptocurrency assets or any associated losses, disclosed or undisclosed.",
+      "evidence": [
+        "c_fy2024:p130:c0",
+        "c_fy2025:p121:c0",
+        "c_fy2025:p288:c2",
+        "c_fy2024:p150:c0",
+        "c_fy2025:p57:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 15.265665992046706,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "c_fy2024",
+          130
+        ],
+        [
+          "c_fy2025",
+          121
+        ],
+        [
+          "c_fy2025",
+          288
+        ],
+        [
+          "c_fy2024",
+          150
+        ],
+        [
+          "c_fy2025",
+          57
+        ]
+      ]
+    },
+    {
+      "id": "c030",
+      "claim": "JPMorgan will report a record profit in 2027.",
+      "gold": "NOT_ENOUGH_INFO",
+      "perturbation": "unverifiable",
+      "pred": "NOT_ENOUGH_INFO",
+      "explanation": "The provided excerpts include certifications and outlooks for JPMorgan Chase for the years 2024 and 2025, including some forward-looking statements for 2026. However, there is no information or projection about JPMorgan Chase's profits or financial results for the year 2027, nor any statement about a record profit in 2027.",
+      "evidence": [
+        "jpm_fy2025:p406:c0",
+        "jpm_fy2025:p52:c0",
+        "jpm_fy2024:p170:c1",
+        "jpm_fy2024:p432:c0"
+      ],
+      "invalid_citations": 0,
+      "latency_ms": 13.103207995300181,
+      "cost_usd": 0.0,
+      "retrieved": [
+        [
+          "jpm_fy2025",
+          406
+        ],
+        [
+          "jpm_fy2025",
+          52
+        ],
+        [
+          "bac_fy2024",
+          229
+        ],
+        [
+          "jpm_fy2024",
+          170
+        ],
+        [
+          "jpm_fy2024",
+          432
+        ]
+      ]
+    }
+  ],
+  "question_metrics": {
+    "comparison": {
+      "n": 8,
+      "hit@1": 0.0,
+      "hit@3": 0.25,
+      "hit@5": 0.25,
+      "recall@5": 0.09375,
+      "mrr": 0.10416666666666666,
+      "answer_correct": 0.375,
+      "faithfulness": 0.7142857142857143,
+      "citation_precision": 0.10714285714285714,
+      "invalid_citations": 0,
+      "latency_ms": 19.3579687474994,
+      "cost_usd": 0.0
+    },
+    "factual": {
+      "n": 10,
+      "hit@1": 0.0,
+      "hit@3": 0.5,
+      "hit@5": 0.6,
+      "recall@5": 0.55,
+      "mrr": 0.25333333333333335,
+      "answer_correct": 0.6,
+      "faithfulness": 0.8571428571428571,
+      "citation_precision": 0.39285714285714285,
+      "invalid_citations": 0,
+      "latency_ms": 62.14990839944221,
+      "cost_usd": 0.0
+    },
+    "numeric": {
+      "n": 12,
+      "hit@1": 0.16666666666666666,
+      "hit@3": 0.25,
+      "hit@5": 0.6666666666666666,
+      "recall@5": 0.375,
+      "mrr": 0.2861111111111111,
+      "answer_correct": 0.6666666666666666,
+      "faithfulness": 0.9,
+      "citation_precision": 0.39166666666666666,
+      "invalid_citations": 0,
+      "latency_ms": 16.351361083555577,
+      "cost_usd": 0.0
+    },
+    "unanswerable": {
+      "n": 10,
+      "hit@1": null,
+      "hit@3": null,
+      "hit@5": null,
+      "recall@5": null,
+      "mrr": null,
+      "answer_correct": 1.0,
+      "faithfulness": null,
+      "citation_precision": null,
+      "invalid_citations": 0,
+      "latency_ms": 15.196683697286062,
+      "cost_usd": 0.0
+    },
+    "_abstention": {
+      "abstain_precision": 0.625,
+      "abstain_recall": 1.0,
+      "false_abstention_rate": 0.2
+    },
+    "_overall": {
+      "n": 40,
+      "hit@1": 0.06666666666666667,
+      "hit@3": 0.3333333333333333,
+      "hit@5": 0.5333333333333333,
+      "recall@5": 0.35833333333333334,
+      "mrr": 0.22666666666666666,
+      "answer_correct": 0.675,
+      "faithfulness": 0.8333333333333334,
+      "citation_precision": 0.3090277777777778,
+      "invalid_citations": 0,
+      "latency_ms": 933,
+      "cost_usd": 0.0
+    }
+  },
+  "claim_retrieval": {
+    "n": 30,
+    "hit@1": 0.3181818181818182,
+    "hit@3": 0.4090909090909091,
+    "hit@5": 0.5454545454545454,
+    "recall@5": 0.4015151515151515,
+    "mrr": 0.3878787878787879,
+    "answer_correct": null,
+    "faithfulness": null,
+    "citation_precision": null,
+    "invalid_citations": 0,
+    "latency_ms": 16.541884831288673,
+    "cost_usd": 0.0
+  },
+  "verify_metrics": {
+    "n": 30,
+    "accuracy": 0.8333333333333334,
+    "macro_f1": 0.8390206284943127,
+    "f1_per_class": {
+      "SUPPORTED": 0.923076923076923,
+      "REFUTED": 0.8571428571428571,
+      "NOT_ENOUGH_INFO": 0.7368421052631579
+    },
+    "confusion": {
+      "SUPPORTED": {
+        "SUPPORTED": 6,
+        "REFUTED": 0,
+        "NOT_ENOUGH_INFO": 1
+      },
+      "REFUTED": {
+        "SUPPORTED": 0,
+        "REFUTED": 12,
+        "NOT_ENOUGH_INFO": 3
+      },
+      "NOT_ENOUGH_INFO": {
+        "SUPPORTED": 0,
+        "REFUTED": 1,
+        "NOT_ENOUGH_INFO": 7
+      }
+    },
+    "by_perturbation": {
+      "bank": {
+        "n": 4,
+        "accuracy": 0.75
+      },
+      "none": {
+        "n": 7,
+        "accuracy": 0.8571428571428571
+      },
+      "number": {
+        "n": 7,
+        "accuracy": 0.8571428571428571
+      },
+      "unverifiable": {
+        "n": 8,
+        "accuracy": 0.875
+      },
+      "year": {
+        "n": 4,
+        "accuracy": 0.75
+      }
+    }
+  },
+  "rescored_from_cache": true,
+  "note": "Metric fix (precision-aware numeric match) re-scored from cache. cost_usd and overall latency_ms restored from the original run's log; per-item latency/cost were not preserved."
+}

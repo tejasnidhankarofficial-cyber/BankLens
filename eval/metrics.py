@@ -65,34 +65,45 @@ _NUM = re.compile(
 _UNIT_TARGET = {"USD_billions": 1e9, "USD_millions": 1e6, "USD_thousands": 1e3, "USD": 1.0}
 
 
-def parse_numbers(text: str) -> list[tuple[float, str]]:
-    """All numbers in text as (value, suffix) where suffix is a lowercase scale word, '%' or ''."""
+def parse_numbers(text: str) -> list[tuple[float, str, int]]:
+    """All numbers in text as (value, suffix, decimals): suffix is a lowercase scale word, '%' or ''."""
     out = []
     for m in _NUM.finditer(text):
-        v = float(m.group(1).replace(",", ""))
+        raw = m.group(1).replace(",", "")
         suf = (m.group(2) or "").lower()
-        out.append((v, "%" if suf == "percent" else suf))
+        out.append(
+            (float(raw), "%" if suf == "percent" else suf, len(raw.split(".")[1]) if "." in raw else 0)
+        )
     return out
 
 
 def numeric_match(answer: str | None, value: float, unit: str, tol: float = 0.01) -> bool:
-    """Does any number in ``answer`` equal ``value`` (in ``unit``) within ``tol``?
-    USD amounts are normalized to dollars; a bare number inherits the only scale word
-    mentioned in the answer (e.g. '58,000 ... in millions')."""
+    """Does any number in ``answer`` equal ``value`` (in ``unit``)?
+
+    A number matches if it is within ``tol`` (1%) of the truth OR equals the truth rounded to the precision the
+    answer states (so '$2.1 trillion' matches 2,148.6 billion and '$3.7 billion' matches 3.658).
+    USD amounts are normalized to dollars; a bare number inherits the only scale word mentioned in the answer
+    (e.g. '58,000 ... in millions')."""
     if not answer:
         return False
     nums = parse_numbers(answer)
+
+    def close(cand: float, target: float, step: float) -> bool:
+        return abs(cand - target) <= tol * abs(target) or abs(cand - target) <= 0.5 * step + 1e-9 * abs(
+            target
+        )
+
     if unit in ("percent", "pct", "%"):
-        return any(suf == "%" and abs(v - value) <= tol * max(abs(value), 1e-9) for v, suf in nums)
+        return any(suf == "%" and close(v, value, 10.0**-d) for v, suf, d in nums)
     target = value * _UNIT_TARGET[unit]
     words = {w for w in re.findall(r"trillion|billion|million|thousand", answer.lower())}
     ambient = _SCALE[next(iter(words))] if len(words) == 1 else None
-    for v, suf in nums:
+    for v, suf, d in nums:
         if suf == "%":
             continue
         mult = _SCALE.get(suf) or ambient
-        cands = [v * mult] if mult else [v, v * 1e3, v * 1e6, v * 1e9]
-        if any(abs(c - target) <= tol * abs(target) for c in cands):
+        mults = [mult] if mult else [1.0, 1e3, 1e6, 1e9]
+        if any(close(v * m, target, (10.0**-d) * m) for m in mults):
             return True
     return False
 

@@ -43,7 +43,13 @@ def test_run_eval_end_to_end(fake_corpus, tmp_path):
     qf.write_text(json.dumps(QUESTIONS))
     cf.write_text(json.dumps(CLAIMS))
     args = argparse.Namespace(
-        judge=False, limit=0, retrieval_only=False, questions=str(qf), claims=str(cf), max_cost=1.0
+        judge=False,
+        limit=0,
+        retrieval_only=False,
+        questions=str(qf),
+        claims=str(cf),
+        max_cost=1.0,
+        out_dir=str(tmp_path / "out"),
     )
     res = run(cfg, args)
     qm = res["question_metrics"]
