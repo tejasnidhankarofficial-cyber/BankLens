@@ -1,55 +1,378 @@
 [
   {
-    "id": "c901",
+    "id": "c001",
+    "claim": "JPMorgan's net income was $57.0 billion in 2025.",
+    "label": "SUPPORTED",
+    "perturbation": "none",
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          49,
+          167
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c002",
+    "claim": "The Federal Reserve lifted Wells Fargo's asset cap in June 2025.",
+    "label": "SUPPORTED",
+    "perturbation": "none",
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          3,
+          4,
+          7
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c003",
+    "claim": "Citigroup's CET1 Capital ratio under the Basel III Standardized Approach was 13.2% at December 31, 2025.",
+    "label": "SUPPORTED",
+    "perturbation": "none",
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          41
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c004",
+    "claim": "Bank of America employed approximately 213,000 employees at the end of 2025.",
+    "label": "SUPPORTED",
+    "perturbation": "none",
+    "sources": [
+      {
+        "doc_id": "bac_fy2025",
+        "pages": [
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c005",
+    "claim": "JPMorgan declared cash dividends of $5.80 per share in 2025.",
+    "label": "SUPPORTED",
+    "perturbation": "none",
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          46
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c006",
+    "claim": "Citigroup's net income increased in 2025 compared with 2024.",
+    "label": "SUPPORTED",
+    "perturbation": "none",
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          12,
+          134
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c007",
+    "claim": "Wells Fargo's CET1 ratio was 10.61% at December 31, 2025.",
+    "label": "SUPPORTED",
+    "perturbation": "none",
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c008",
+    "claim": "JPMorgan's net income was $62.5 billion in 2025.",
+    "label": "REFUTED",
+    "perturbation": "number",
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          49,
+          167
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c009",
+    "claim": "Bank of America's net income was $35.2 billion in 2025.",
+    "label": "REFUTED",
+    "perturbation": "number",
+    "sources": [
+      {
+        "doc_id": "bac_fy2025",
+        "pages": [
+          29,
+          93
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c010",
+    "claim": "Citigroup's CET1 Capital ratio under the Standardized Approach was 15.4% at December 31, 2025.",
+    "label": "REFUTED",
+    "perturbation": "number",
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          41
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c011",
+    "claim": "Wells Fargo had approximately 250,000 employees at the end of 2025.",
+    "label": "REFUTED",
+    "perturbation": "number",
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c012",
+    "claim": "JPMorgan's cash dividends declared per share were $3.20 in 2025.",
+    "label": "REFUTED",
+    "perturbation": "number",
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          46
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c013",
+    "claim": "Wells Fargo's total assets were $2.9 trillion at year-end 2025.",
+    "label": "REFUTED",
+    "perturbation": "number",
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          93
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c014",
+    "claim": "Wells Fargo's net income fell in 2025.",
+    "label": "REFUTED",
+    "perturbation": "number",
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          17,
+          91
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c015",
+    "claim": "The Federal Reserve lifted Wells Fargo's asset cap in June 2023.",
+    "label": "REFUTED",
+    "perturbation": "year",
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          3,
+          4,
+          7
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c016",
+    "claim": "JPMorgan acquired certain assets and liabilities of First Republic Bank on May 1, 2021.",
+    "label": "REFUTED",
+    "perturbation": "year",
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          314,
+          324
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c017",
+    "claim": "Citigroup's net income for 2024 was $14.3 billion.",
+    "label": "REFUTED",
+    "perturbation": "year",
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          12,
+          134
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c018",
+    "claim": "JPMorgan's total assets were $4.0 trillion at year-end 2025.",
+    "label": "REFUTED",
+    "perturbation": "year",
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          57,
+          169
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c019",
+    "claim": "Bank of America's net income was $57.0 billion in 2025.",
+    "label": "REFUTED",
+    "perturbation": "bank",
+    "sources": [
+      {
+        "doc_id": "bac_fy2025",
+        "pages": [
+          29,
+          93
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c020",
+    "claim": "Wells Fargo's Standardized CET1 ratio was 14.6% at the end of 2025.",
+    "label": "REFUTED",
+    "perturbation": "bank",
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c021",
+    "claim": "Citigroup's net income was $30.5 billion in 2025.",
+    "label": "REFUTED",
+    "perturbation": "bank",
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          12,
+          134
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c022",
+    "claim": "JPMorgan's net interest income was $47.5 billion in 2025.",
+    "label": "REFUTED",
+    "perturbation": "bank",
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          49,
+          167
+        ]
+      }
+    ]
+  },
+  {
+    "id": "c023",
     "claim": "Citigroup is about to be acquired by a foreign bank.",
     "label": "NOT_ENOUGH_INFO",
     "perturbation": "unverifiable",
     "sources": []
   },
   {
-    "id": "c902",
+    "id": "c024",
     "claim": "Wells Fargo is facing an imminent bank run.",
     "label": "NOT_ENOUGH_INFO",
     "perturbation": "unverifiable",
     "sources": []
   },
   {
-    "id": "c903",
+    "id": "c025",
     "claim": "JPMorgan Chase plans to relocate its headquarters out of New York in 2026.",
     "label": "NOT_ENOUGH_INFO",
     "perturbation": "unverifiable",
     "sources": []
   },
   {
-    "id": "c904",
+    "id": "c026",
     "claim": "Bank of America will cut its dividend next quarter.",
     "label": "NOT_ENOUGH_INFO",
     "perturbation": "unverifiable",
     "sources": []
   },
   {
-    "id": "c905",
+    "id": "c027",
     "claim": "A major US bank has secretly lost most of its deposits this month.",
     "label": "NOT_ENOUGH_INFO",
     "perturbation": "unverifiable",
     "sources": []
   },
   {
-    "id": "c906",
+    "id": "c028",
     "claim": "Wells Fargo's CEO is resigning next year.",
     "label": "NOT_ENOUGH_INFO",
     "perturbation": "unverifiable",
     "sources": []
   },
   {
-    "id": "c907",
+    "id": "c029",
     "claim": "Citigroup holds large undisclosed losses on cryptocurrency.",
     "label": "NOT_ENOUGH_INFO",
     "perturbation": "unverifiable",
     "sources": []
   },
   {
-    "id": "c908",
+    "id": "c030",
     "claim": "JPMorgan will report a record profit in 2027.",
     "label": "NOT_ENOUGH_INFO",
     "perturbation": "unverifiable",

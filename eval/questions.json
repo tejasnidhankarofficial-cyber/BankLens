@@ -1,6 +1,603 @@
 [
   {
-    "id": "q901",
+    "id": "q001",
+    "type": "factual",
+    "question": "How many employees did JPMorgan Chase have in North America at December 31, 2025?",
+    "expected": {
+      "answer": "185,208",
+      "keywords": [
+        "185,208"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          9
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q002",
+    "type": "factual",
+    "question": "Approximately how many employees did Bank of America employ at both December 31, 2025 and 2024?",
+    "expected": {
+      "answer": "approximately 213,000",
+      "keywords": [
+        "213,000"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "bac_fy2025",
+        "pages": [
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q003",
+    "type": "factual",
+    "question": "In which month and year did the Federal Reserve lift the asset cap on Wells Fargo?",
+    "expected": {
+      "answer": "June 2025",
+      "keywords": [
+        "June 2025"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          3,
+          4,
+          7
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q004",
+    "type": "factual",
+    "question": "On what date did JPMorgan Chase acquire certain assets and assume certain liabilities of First Republic Bank?",
+    "expected": {
+      "answer": "May 1, 2023",
+      "keywords": [
+        "May 1, 2023"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          314,
+          324
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q005",
+    "type": "factual",
+    "question": "Approximately how many employees were included in Citi's divestiture of its remaining Russian business operations?",
+    "expected": {
+      "answer": "approximately 800",
+      "keywords": [
+        "800"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          11
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q006",
+    "type": "factual",
+    "question": "What quarterly common stock dividend per share did JPMorgan Chase's Board declare in December 2025?",
+    "expected": {
+      "answer": "$1.50 per share",
+      "keywords": [
+        "1.50"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          99
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q007",
+    "type": "factual",
+    "question": "In how many states does Bank of America operate financial centers (besides the District of Columbia)?",
+    "expected": {
+      "answer": "38 states",
+      "keywords": [
+        "38"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "bac_fy2025",
+        "pages": [
+          39
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q008",
+    "type": "factual",
+    "question": "What is Citi's current GSIB surcharge used in calculating its required regulatory CET1 Capital ratio under the Standardized Approach?",
+    "expected": {
+      "answer": "3.5%",
+      "keywords": [
+        "3.5"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          38
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q009",
+    "type": "factual",
+    "question": "What was Wells Fargo's headcount at the end of 2025?",
+    "expected": {
+      "answer": "205,198",
+      "keywords": [
+        "205,198"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q010",
+    "type": "factual",
+    "question": "What were JPMorgan Chase's cash dividends declared per share for 2025?",
+    "expected": {
+      "answer": "$5.80",
+      "keywords": [
+        "5.80"
+      ]
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          46
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q011",
+    "type": "numeric",
+    "question": "What was JPMorgan Chase's net income for 2025?",
+    "expected": {
+      "value": 57.048,
+      "unit": "USD_billions",
+      "answer": "$57.0 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          49,
+          167
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q012",
+    "type": "numeric",
+    "question": "What was Bank of America's net income for 2025?",
+    "expected": {
+      "value": 30.509,
+      "unit": "USD_billions",
+      "answer": "$30.5 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "bac_fy2025",
+        "pages": [
+          29,
+          93
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q013",
+    "type": "numeric",
+    "question": "What was Citigroup's net income for 2025?",
+    "expected": {
+      "value": 14.306,
+      "unit": "USD_billions",
+      "answer": "$14.3 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          12,
+          134
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q014",
+    "type": "numeric",
+    "question": "What was Wells Fargo's net income for 2025?",
+    "expected": {
+      "value": 21.338,
+      "unit": "USD_billions",
+      "answer": "$21.3 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          17,
+          91
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q015",
+    "type": "numeric",
+    "question": "What were JPMorgan Chase's total assets at December 31, 2025?",
+    "expected": {
+      "value": 4424.9,
+      "unit": "USD_billions",
+      "answer": "$4,424.9 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          57,
+          169
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q016",
+    "type": "numeric",
+    "question": "What were Citigroup's total assets at December 31, 2025?",
+    "expected": {
+      "value": 2657.202,
+      "unit": "USD_billions",
+      "answer": "$2,657.2 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          14,
+          136
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q017",
+    "type": "numeric",
+    "question": "What were Wells Fargo's total assets at December 31, 2025?",
+    "expected": {
+      "value": 2148.631,
+      "unit": "USD_billions",
+      "answer": "$2,148.6 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          93
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q018",
+    "type": "numeric",
+    "question": "What was JPMorgan Chase's net interest income for 2025?",
+    "expected": {
+      "value": 95.443,
+      "unit": "USD_billions",
+      "answer": "$95.4 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          49,
+          167
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q019",
+    "type": "numeric",
+    "question": "What was Citigroup's net interest income for 2024?",
+    "expected": {
+      "value": 54.095,
+      "unit": "USD_billions",
+      "answer": "$54.1 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "c_fy2024",
+        "pages": [
+          14,
+          142
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q020",
+    "type": "numeric",
+    "question": "What was Wells Fargo's provision for credit losses in 2025?",
+    "expected": {
+      "value": 3.658,
+      "unit": "USD_billions",
+      "answer": "$3.7 billion"
+    },
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          17,
+          91
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q021",
+    "type": "numeric",
+    "question": "What was JPMorgan Chase's Standardized CET1 capital ratio at December 31, 2025?",
+    "expected": {
+      "value": 14.6,
+      "unit": "percent",
+      "answer": "14.6%"
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          96
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q022",
+    "type": "numeric",
+    "question": "What was Citigroup's CET1 Capital ratio under the Basel III Standardized Approach at December 31, 2025?",
+    "expected": {
+      "value": 13.2,
+      "unit": "percent",
+      "answer": "13.2%"
+    },
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          41
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q023",
+    "type": "comparison",
+    "question": "Which had higher net income for 2025, JPMorgan Chase or Bank of America?",
+    "expected": {
+      "answer": "JPMorgan Chase ($57.0 billion vs Bank of America's $30.5 billion)."
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          49,
+          167
+        ]
+      },
+      {
+        "doc_id": "bac_fy2025",
+        "pages": [
+          29,
+          93
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q024",
+    "type": "comparison",
+    "question": "Did Citigroup's net income increase or decrease from 2024 to 2025?",
+    "expected": {
+      "answer": "It increased, from $12.7 billion in 2024 to $14.3 billion in 2025."
+    },
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          12,
+          134
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q025",
+    "type": "comparison",
+    "question": "Which of JPMorgan Chase, Bank of America, Citigroup and Wells Fargo reported the largest total assets at year-end 2025?",
+    "expected": {
+      "answer": "JPMorgan Chase, at $4,424.9 billion."
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          57,
+          169
+        ]
+      },
+      {
+        "doc_id": "bac_fy2025",
+        "pages": [
+          94
+        ]
+      },
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          14,
+          136
+        ]
+      },
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          93
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q026",
+    "type": "comparison",
+    "question": "How did Wells Fargo's net income for 2025 compare with 2024?",
+    "expected": {
+      "answer": "It rose from $19.7 billion in 2024 to $21.3 billion in 2025."
+    },
+    "sources": [
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          17,
+          91
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q027",
+    "type": "comparison",
+    "question": "Which had the higher Standardized CET1 ratio at December 31, 2025, JPMorgan Chase or Citigroup?",
+    "expected": {
+      "answer": "JPMorgan Chase (14.6% vs Citigroup's 13.2%)."
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          96
+        ]
+      },
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          41
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q028",
+    "type": "comparison",
+    "question": "Did JPMorgan Chase's total assets grow or shrink between year-end 2024 and year-end 2025?",
+    "expected": {
+      "answer": "They grew, from about $4,002.8 billion to $4,424.9 billion."
+    },
+    "sources": [
+      {
+        "doc_id": "jpm_fy2025",
+        "pages": [
+          57,
+          169
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q029",
+    "type": "comparison",
+    "question": "Which had more employees at year-end 2025, Wells Fargo or Bank of America?",
+    "expected": {
+      "answer": "Bank of America (about 213,000 vs Wells Fargo's 205,198)."
+    },
+    "sources": [
+      {
+        "doc_id": "bac_fy2025",
+        "pages": [
+          5
+        ]
+      },
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q030",
+    "type": "comparison",
+    "question": "Which reported higher net income for 2025, Citigroup or Wells Fargo?",
+    "expected": {
+      "answer": "Wells Fargo ($21.3 billion vs Citigroup's $14.3 billion)."
+    },
+    "sources": [
+      {
+        "doc_id": "c_fy2025",
+        "pages": [
+          12,
+          134
+        ]
+      },
+      {
+        "doc_id": "wfc_fy2025",
+        "pages": [
+          17,
+          91
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q031",
     "type": "unanswerable",
     "question": "What will JPMorgan's dividend per share be in 2030?",
     "expected": {
@@ -9,7 +606,7 @@
     "sources": []
   },
   {
-    "id": "q902",
+    "id": "q032",
     "type": "unanswerable",
     "question": "What is Bank of America's market share in India?",
     "expected": {
@@ -18,7 +615,7 @@
     "sources": []
   },
   {
-    "id": "q903",
+    "id": "q033",
     "type": "unanswerable",
     "question": "What is Citigroup's expected net income for 2027?",
     "expected": {
@@ -27,7 +624,7 @@
     "sources": []
   },
   {
-    "id": "q904",
+    "id": "q034",
     "type": "unanswerable",
     "question": "How many employees does Wells Fargo have in Brazil?",
     "expected": {
@@ -36,7 +633,7 @@
     "sources": []
   },
   {
-    "id": "q905",
+    "id": "q035",
     "type": "unanswerable",
     "question": "What was Goldman Sachs's CET1 ratio at year-end 2025?",
     "expected": {
@@ -45,16 +642,16 @@
     "sources": []
   },
   {
-    "id": "q906",
+    "id": "q036",
     "type": "unanswerable",
-    "question": "What is the CEO of JPMorgan's personal net worth?",
+    "question": "What is the personal net worth of JPMorgan's CEO?",
     "expected": {
       "answer": null
     },
     "sources": []
   },
   {
-    "id": "q907",
+    "id": "q037",
     "type": "unanswerable",
     "question": "Will Bank of America acquire a regional bank in 2026?",
     "expected": {
@@ -63,7 +660,7 @@
     "sources": []
   },
   {
-    "id": "q908",
+    "id": "q038",
     "type": "unanswerable",
     "question": "What was Wells Fargo's net income in 2019?",
     "expected": {
@@ -72,7 +669,7 @@
     "sources": []
   },
   {
-    "id": "q909",
+    "id": "q039",
     "type": "unanswerable",
     "question": "What is Citigroup's stock price target for next year?",
     "expected": {
@@ -81,7 +678,7 @@
     "sources": []
   },
   {
-    "id": "q910",
+    "id": "q040",
     "type": "unanswerable",
     "question": "How many customers did JPMorgan lose to cryptocurrency exchanges in 2025?",
     "expected": {

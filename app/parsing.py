@@ -427,12 +427,19 @@ def parse_pymupdf(path: str) -> list[Page]:
     pages: list[Page] = []
     section = ""
     for i, pg in enumerate(doc, start=1):
+        ruled: list[tuple] = []  # (table, markdown)
         try:
             # Decorative header boxes come back as 1-2 row "tables" and would swallow real column headers.
-            ruled = [t for t in pg.find_tables().tables if t.row_count >= 3 and t.col_count >= 2]
-        except Exception:  # find_tables can fail on odd pages; degrade to text only
-            ruled = []
-        boxes = [tuple(t.bbox) for t in ruled]
+            for t in pg.find_tables().tables:
+                if t.row_count < 3 or t.col_count < 2:
+                    continue
+                md = t.to_markdown().strip()
+                if md.count("<br>") > 5 or re.search(r"\|Col\d", md):  # one giant merged cell, not a table
+                    continue
+                ruled.append((t, md))
+        except Exception:  # find_tables can fail on odd pages; degrade to row reconstruction
+            pass
+        boxes = [tuple(t.bbox) for t, _ in ruled]
         words = [
             w for w in pg.get_text("words")
             if not any(_bbox_intersects(w[:4], tb) for tb in boxes)
@@ -469,7 +476,7 @@ def parse_pymupdf(path: str) -> list[Page]:
         # slotted in by vertical position.
         seq: list[tuple[float, str, object]] = [(y, "text", t) for y, t in paragraphs_from_words(text_words)]
         tables: list[tuple[float, str, object]] = [(rows[x].y0, "btable", rows[x:y]) for x, y in runs]
-        tables += [(t.bbox[1], "table", t) for t in ruled]
+        tables += [(t.bbox[1], "table", md) for t, md in ruled]
         for tb in sorted(tables, key=lambda it: it[0]):
             pos = next((k for k, it in enumerate(seq) if it[1] == "text" and it[0] > tb[0]), len(seq))
             seq.insert(pos, tb)
@@ -486,10 +493,7 @@ def parse_pymupdf(path: str) -> list[Page]:
                 prev_texts.append(txt)
                 continue
             if kind == "table":
-                try:
-                    md = val.to_markdown().strip()  # type: ignore[attr-defined]
-                except Exception:
-                    md = ""
+                md = str(val)
                 head = ""
             else:
                 trs: list[_Row] = val  # type: ignore[assignment]
