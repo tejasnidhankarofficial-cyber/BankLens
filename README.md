@@ -124,8 +124,8 @@ the "Total" rows, per-bank retrieval for comparisons, and a prompt check that ev
 
 ### Judge validation (pending)
 
-Run `python -m eval.judge_agreement --export eval/results/05_rerank.json`, label the 25 rows in `eval/human_labels.json`
-by hand (`human_correct`, `human_faithful`), then `python -m eval.judge_agreement` prints agreement and Cohen's kappa.
+Run `python -m eval.label_cli` to label the 25 rows in `eval/human_labels.json` (it shows each question, the cited passages and
+asks two yes/no questions), then `python -m eval.judge_agreement` prints agreement and Cohen's kappa.
 Until then, the faithfulness and comparison/factual correctness numbers rely on an unvalidated LLM judge.
 
 ## Limitations
