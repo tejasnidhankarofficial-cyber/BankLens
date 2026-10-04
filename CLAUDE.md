@@ -16,3 +16,5 @@ Full spec lives in `banklens-spec.md` (keep it in the repo root if you want it a
 - 2026-10-03: Real 10-K tables are borderless, so PyMuPDF `find_tables()` alone missed them (JPM capital table came out one number per line). The pymupdf parser now rebuilds rows from word positions, detects runs of numeric rows as tables and aligns cells to columns. Ruled tables still use `find_tables()`.
 - 2026-10-03: Sections come from PDF bookmarks when present (JPM, Citi), else the heading regex (BAC has none).
 - 2026-10-03: The Wells Fargo files first downloaded were the short 10-K wrapper (no financials). Need the Annual Report / Exhibit 13.
+- 2026-10-03: Fixed on real data: decorative 1-2 row ruled boxes are ignored (they swallowed column headers), running page headers/footers are excluded from content (kept for page labels), BAC footers ("Bank of America 98") parse. Known limits: BAC two-column glossary pages interleave text; BAC sections are regex-only and sticky; Citi tables can show a trailing "$" in the wrong cell.
+- 2026-10-03: Ingest parses one PDF per process; label index (hash embeddings, free) built over 6 good PDFs + 2 WFC wrapper files.

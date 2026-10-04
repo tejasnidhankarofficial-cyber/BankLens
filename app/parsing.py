@@ -54,6 +54,15 @@ _LABEL_PATTERNS = [
 ]
 
 
+# Footers like "Bank of America 98" / "99 Bank of America": only trusted in the last 3 lines.
+_TAIL_PATTERNS = [
+    re.compile(r"^[A-Za-z][A-Za-z .,&'’/-]{2,40}\s+(\d{1,3})$"),
+    re.compile(r"^(\d{1,3})\s+[A-Za-z][A-Za-z .,&'’/-]{2,40}$"),
+]
+HEADER_BAND = 40.0  # pt from top / bottom treated as running header / footer (not content)
+FOOTER_BAND = 45.0
+
+
 @dataclass
 class Block:
     kind: str  # "text" | "table"
@@ -80,9 +89,14 @@ def detect_page_label(lines: list[str], page_index: int) -> str:
     """Look in the first/last 3 non-empty lines for a standalone number or a
     '... Form 10-K 45' style footer. Fall back to the PDF index."""
     clean = [ln.strip() for ln in lines if ln.strip()]
-    candidates = clean[-3:][::-1] + clean[:3]
-    for ln in candidates:
+    tail = clean[-3:][::-1]
+    for ln in tail + clean[:3]:
         for pat in _LABEL_PATTERNS:
+            m = pat.search(ln)
+            if m:
+                return m.group(1)
+    for ln in tail:
+        for pat in _TAIL_PATTERNS:
             m = pat.search(ln)
             if m:
                 return m.group(1)
@@ -393,7 +407,8 @@ def parse_pymupdf(path: str) -> list[Page]:
     section = ""
     for i, pg in enumerate(doc, start=1):
         try:
-            ruled = list(pg.find_tables().tables)
+            # Decorative header boxes come back as 1-2 row "tables" and would swallow real column headers.
+            ruled = [t for t in pg.find_tables().tables if t.row_count >= 3 and t.col_count >= 2]
         except Exception:  # find_tables can fail on odd pages; degrade to text only
             ruled = []
         boxes = [tuple(t.bbox) for t in ruled]
@@ -401,7 +416,9 @@ def parse_pymupdf(path: str) -> list[Page]:
             w for w in pg.get_text("words")
             if not any(_bbox_intersects(w[:4], tb) for tb in boxes)
         ]  # fmt: skip
-        rows = rows_from_words(words)
+        all_rows = rows_from_words(words)
+        H = pg.rect.height
+        rows = [r for r in all_rows if r.y1 >= HEADER_BAND and r.y0 <= H - FOOTER_BAND]
         runs = find_table_runs(rows)
 
         # Page-level section source: PDF bookmarks if available, else heading regex.
@@ -460,7 +477,7 @@ def parse_pymupdf(path: str) -> list[Page]:
             units = find_units(*(prev_texts[-2:][::-1]), head, md[:400])
             blocks.append(Block("table", md, section=section, title=title or section, units=units, y=y))
 
-        lines = [r.text for r in rows]
+        lines = [r.text for r in all_rows]  # header/footer rows included: the printed page number lives there
         pages.append(Page(i, detect_page_label(lines, i), section, blocks))
     doc.close()
     return pages

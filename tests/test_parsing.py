@@ -112,3 +112,9 @@ def test_bookmark_sections(tmp_path):
     pages = parse_pdf(str(out), "pymupdf")
     assert pages[0].section == "Item 7. MD&A"
     assert pages[1].section == "Item 7. MD&A > Capital Risk Management"
+
+
+def test_tail_page_labels():
+    assert detect_page_label(["text", "more", "Bank of America 98"], 100) == "98"
+    assert detect_page_label(["text", "more", "99 Bank of America"], 101) == "99"
+    assert detect_page_label(["Fourth Quarter 2025", "text"], 5) == "5"  # a year is not a page label

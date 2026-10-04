@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 from dataclasses import asdict
 from pathlib import Path
@@ -25,6 +26,13 @@ def _chroma(path: Path):
     from chromadb.config import Settings
 
     return chromadb.PersistentClient(path=str(path / "chroma"), settings=Settings(anonymized_telemetry=False))
+
+
+def _parse_and_chunk(args: tuple) -> tuple[str, int, list[Chunk]]:
+    """Worker (top-level so it can be pickled): parse one PDF and chunk it."""
+    pdf, doc, parser, chunking = args
+    pages = parse_pdf(pdf, parser)
+    return doc.doc_id, len(pages), chunk_document(pages, doc, chunking)
 
 
 class Index:
@@ -56,14 +64,22 @@ def build_index(
     docs = docs if docs is not None else load_manifest(cfg)
     embedder = Embedder(cfg, cache, ledger)
     chunks: list[Chunk] = []
+    jobs = []
     for doc in docs:
         pdf = cfg.path("raw_dir") / doc.file
         if not pdf.exists():
             log(f"  ! missing {pdf}, skipping")
             continue
-        pages = parse_pdf(str(pdf), cfg.parser)
-        cs = chunk_document(pages, doc, cfg.chunking)
-        log(f"  {doc.doc_id}: {len(pages)} pages -> {len(cs)} chunks")
+        jobs.append((str(pdf), doc, cfg.parser, cfg.chunking))
+    if len(jobs) > 1:  # parsing is CPU-bound and slow on 400-page PDFs: one process per document
+        from concurrent.futures import ProcessPoolExecutor
+
+        with ProcessPoolExecutor(max_workers=min(len(jobs), os.cpu_count() or 1)) as ex:
+            results = list(ex.map(_parse_and_chunk, jobs))
+    else:
+        results = [_parse_and_chunk(j) for j in jobs]
+    for doc_id, n_pages, cs in results:
+        log(f"  {doc_id}: {n_pages} pages -> {len(cs)} chunks")
         chunks.extend(cs)
     if not chunks:
         raise RuntimeError("no chunks produced; are the PDFs in data/raw/?")
