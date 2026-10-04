@@ -80,7 +80,7 @@ Eval set: 40 questions (10 factual, 12 numeric, 8 comparison, 10 unanswerable) a
 8 not-enough-info) over the 8 filings. Every expected answer was checked by script against the text of its cited PDF
 page. The set was drafted with AI assistance, not purely by hand. Full tables: [eval/results/results.md](eval/results/results.md).
 
-| Config | Hit@5 | MRR | Answer correct | Faithfulness | Abstain P / R | False abstain | Verify acc | Latency | Cost / run |
+| Config | Hit@5 | MRR | Answer correct | Faithfulness (judge, inflated) | Abstain P / R | False abstain | Verify acc | Latency | Cost / run |
 |---|---|---|---|---|---|---|---|---|---|
 | 01 baseline (pypdf, fixed, dense) | 0.567 | 0.358 | 0.675 | 0.817 | 0.69 / 0.90 | 0.133 | 0.867 | 1.2 s | $0.083 |
 | 02 pymupdf tables + section_table | 0.567 | 0.269 | 0.625 | 0.761 | 0.59 / 1.00 | 0.233 | 0.833 | 0.8 s | $0.059 |
@@ -95,7 +95,7 @@ Total spend for all indexes and runs was about $0.60. Charts: `eval/results/abla
 **What the ablation shows** (n=40, so one question is 2.5 points: read differences under about 5 points as noise):
 
 - **Filtering and reranking help most.** The bank/year filter gave the largest gain among cheap steps (Hit@5 0.53 to 0.67).
-  Reranking then lifted MRR from 0.28 to 0.46 and made every cited answer faithful, at roughly 4x the latency on CPU.
+  Reranking then lifted MRR from 0.28 to 0.46, at roughly 4x the latency on CPU. Its judged faithfulness of 1.000 is an upper bound (see Judge validation).
 - **Table-aware parsing alone did not help.** Config 02 matched the baseline on Hit@5 but had lower MRR and numeric correctness
   (0.92 down to 0.67). Parsing better tables is not enough when chunking splits a table away from the row that answers the question.
 - **Hybrid retrieval did not help on its own.** BM25 over number-heavy table text added noise until the filter narrowed the pool.
@@ -122,18 +122,33 @@ Takeaways: the biggest remaining errors come from chunking (a table row separate
 multi-entity retrieval, not from the embedding model. Candidate fixes are row-aware table chunks that always repeat the title and
 the "Total" rows, per-bank retrieval for comparisons, and a prompt check that every returned number appears in an excerpt.
 
-### Judge validation (pending)
+### Judge validation
 
-Run `python -m eval.label_cli` to label the 25 rows in `eval/human_labels.json` (it shows each question, the cited passages and
-asks two yes/no questions), then `python -m eval.judge_agreement` prints agreement and Cohen's kappa.
-Until then, the faithfulness and comparison/factual correctness numbers rely on an unvalidated LLM judge.
+I hand-labeled 25 answers from config 05 (10 numeric, 9 factual, 6 comparison) for correctness and faithfulness, without seeing
+the judge's verdicts (`python -m eval.label_cli`, then `python -m eval.judge_agreement`).
+
+| | Agreement | Cohen's kappa | Human positive | Automatic / judge positive |
+|---|---|---|---|---|
+| Correctness | 92% (23/25) | 0.70 | 21/25 | 21/25 |
+| Faithfulness | 80% (20/25) | 0.00 | 20/25 | 25/25 |
+
+- **Correctness is trustworthy on this sample.** Numeric and keyword answers are scored by rules and comparison answers by the
+  LLM judge. The judge agreed with me on all 6 comparison answers. The two disagreements are rule edge cases: I rejected
+  "about $2.1 trillion" for 2,148.6 billion (the precision-aware rule accepts it) and accepted "over 205,000" for 205,198
+  (the exact-keyword rule rejects it).
+- **The faithfulness judge is too lenient, so the faithfulness column above is inflated.** It scored all 25 answers as fully
+  supported, while I flagged 5 as not supported by their cited passages. All 5 are failures also found in the error analysis
+  (wrong CET1 column, invented total assets, one-sided comparisons). A kappa of 0.00 means the judge adds no information beyond
+  "always faithful". Read faithfulness as an upper bound, not a measurement.
+- Next step if continuing: use a stricter judge prompt or a stronger judge model, re-validate on fresh labels (not these 25, to
+  avoid tuning on the validation set), and report the corrected faithfulness.
 
 ## Limitations
 
 - "Supported" means the bank reported it, not independently audited truth.
 - Answers are dated to the filing (FY2024 / FY2025); facts go stale.
 - Chunks never cross page boundaries, so a fact split across pages is retrieved as two chunks.
-- LLM-judge bias, mitigated by a human agreement check (Cohen's kappa).
+- LLM-judge bias: the faithfulness judge was found too lenient (kappa 0.00 against my labels on 25 answers), so faithfulness scores are upper bounds.
 - Small eval set (70 items): results are indicative, not statistically conclusive.
 - The eval set was drafted with AI assistance and verified against the cited pages by script, not written purely by hand.
 - Page-label detection is heuristic and BAC pages without a printed footer fall back to the PDF index.
