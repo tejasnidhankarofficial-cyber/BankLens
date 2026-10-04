@@ -183,6 +183,11 @@ def _bbox_intersects(a, b) -> bool:
     return not (a[2] <= b[0] or a[0] >= b[2] or a[3] <= b[1] or a[1] >= b[3])
 
 
+def _in_boxes(w, boxes) -> bool:
+    cx, cy = (w[0] + w[2]) / 2, (w[1] + w[3]) / 2
+    return any(bx0 <= cx <= bx1 and by0 <= cy <= by1 for bx0, by0, bx1, by1 in boxes)
+
+
 def _is_num_cell(c: str) -> bool:
     c = re.sub(r"\([a-z0-9]{1,2}\)", "", c)
     c = c.replace("$", "").replace("%", "").replace("(", "").replace(")", "").strip()
@@ -355,6 +360,22 @@ def paragraphs_from_rows(rows: list[_Row]) -> list[tuple[float, str]]:
     return out
 
 
+def paragraphs_from_words(words: list[tuple]) -> list[tuple[float, str]]:
+    """Reading-order paragraphs from PyMuPDF words, following its block/line numbers (keeps columns apart)."""
+    blocks: dict[int, dict[int, list[tuple]]] = {}
+    for w in words:  # words arrive in block order
+        blocks.setdefault(w[5], {}).setdefault(w[6], []).append(w)
+    out: list[tuple[float, str]] = []
+    for lines_by_no in blocks.values():
+        lines = []
+        for ws in lines_by_no.values():
+            ws.sort(key=lambda w: w[0])
+            lines.append(_Row(min(w[1] for w in ws), max(w[3] for w in ws), [" ".join(w[4] for w in ws)]))
+        lines.sort(key=lambda r: r.y0)
+        out.extend(paragraphs_from_rows(lines))
+    return out
+
+
 def _title_like(line: str) -> bool:
     line = line.strip()
     return (
@@ -430,26 +451,29 @@ def parse_pymupdf(path: str) -> list[Page]:
         if toc:
             section = toc_cur
 
-        # Build items in reading order: (y, kind, payload)
-        items: list[tuple[float, str, object]] = []
-        in_table = set()
-        for a, b in runs:
-            in_table.update(range(a, b))
-            items.append((rows[a].y0, "btable", rows[a:b]))
-        # paragraphs must not span a table: split text rows at table boundaries
-        seg: list[_Row] = []
-        for k, r in enumerate(rows):
-            if k in in_table:
-                for y, t in paragraphs_from_rows(seg):
-                    items.append((y, "text", t))
-                seg = []
-            else:
-                seg.append(r)
-        for y, t in paragraphs_from_rows(seg):
-            items.append((y, "text", t))
-        for t in ruled:
-            items.append((t.bbox[1], "table", t))
-        items.sort(key=lambda it: it[0])
+        # Table regions found by row reconstruction (borderless tables)
+        run_boxes = [
+            (
+                min(g[0] for r in rows[x:y] for g in r.geo),
+                rows[x].y0 - 1,
+                max(g[1] for r in rows[x:y] for g in r.geo),
+                rows[y - 1].y1 + 1,
+            )
+            for x, y in runs
+        ]
+
+        text_words = [
+            w for w in words if w[3] >= HEADER_BAND and w[1] <= H - FOOTER_BAND and not _in_boxes(w, run_boxes)
+        ]  # fmt: skip
+        # Text keeps the PDF's block order (so two-column pages are not interleaved); tables are
+        # slotted in by vertical position.
+        seq: list[tuple[float, str, object]] = [(y, "text", t) for y, t in paragraphs_from_words(text_words)]
+        tables: list[tuple[float, str, object]] = [(rows[x].y0, "btable", rows[x:y]) for x, y in runs]
+        tables += [(t.bbox[1], "table", t) for t in ruled]
+        for tb in sorted(tables, key=lambda it: it[0]):
+            pos = next((k for k, it in enumerate(seq) if it[1] == "text" and it[0] > tb[0]), len(seq))
+            seq.insert(pos, tb)
+        items = seq
 
         blocks: list[Block] = []
         prev_texts: list[str] = []

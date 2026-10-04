@@ -118,3 +118,21 @@ def test_tail_page_labels():
     assert detect_page_label(["text", "more", "Bank of America 98"], 100) == "98"
     assert detect_page_label(["text", "more", "99 Bank of America"], 101) == "99"
     assert detect_page_label(["Fourth Quarter 2025", "text"], 5) == "5"  # a year is not a page label
+
+
+def test_two_column_text_not_interleaved(tmp_path):
+    from reportlab.pdfgen import canvas
+
+    pdf = tmp_path / "two.pdf"
+    c = canvas.Canvas(str(pdf))
+    c.setFont("Helvetica", 10)
+    for col, x in (("LEFT", 72), ("RIGHT", 330)):  # left column fully drawn before the right one
+        y = 700
+        for i in range(8):
+            c.drawString(x, y, f"{col} column sentence number {i} continues across the line")
+            y -= 12
+    c.save()
+    page = parse_pdf(str(pdf), "pymupdf")[0]
+    texts = [b.text for b in page.blocks if b.kind == "text"]
+    assert texts and all(not ("LEFT" in t and "RIGHT" in t) for t in texts)
+    assert not any(b.kind == "table" for b in page.blocks)
