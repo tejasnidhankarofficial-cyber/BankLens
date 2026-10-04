@@ -13,3 +13,6 @@ Full spec lives in `banklens-spec.md` (keep it in the repo root if you want it a
 - 2026-10-02: Scope cut to 3 days: 40 questions + 30 claims; contextual-header experiment is a stretch goal.
 - 2026-10-02: `page_index` is the 1-based PDF page number (matches PDF viewers and eval labels).
 - 2026-10-02: Seeded eval with 10 unanswerable questions and 8 rumor-style NOT_ENOUGH_INFO claims; the rest need hand labeling against the real PDFs.
+- 2026-10-03: Real 10-K tables are borderless, so PyMuPDF `find_tables()` alone missed them (JPM capital table came out one number per line). The pymupdf parser now rebuilds rows from word positions, detects runs of numeric rows as tables and aligns cells to columns. Ruled tables still use `find_tables()`.
+- 2026-10-03: Sections come from PDF bookmarks when present (JPM, Citi), else the heading regex (BAC has none).
+- 2026-10-03: The Wells Fargo files first downloaded were the short 10-K wrapper (no financials). Need the Annual Report / Exhibit 13.
