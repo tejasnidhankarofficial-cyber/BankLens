@@ -79,17 +79,57 @@ def verify(req: VerifyRequest):
         raise HTTPException(503, str(e)) from e
 
 
-def _search_rects(page, snippet: str):
-    text = re.sub(r"\s+", " ", snippet).strip()
-    for n in (80, 50, 30):
-        rects = page.search_for(text[:n])
-        if rects:
-            return rects
+def _find(page, needle: str) -> list:
+    for size in (80, 40):
+        found = page.search_for(needle[:size])
+        if found:
+            return found
     return []
 
 
+def highlight_rects(page, snippet: str, max_rects: int = 80) -> list:
+    """Rectangles on ``page`` for the cited passage.
+
+    Text chunks: search each line. Table chunks are markdown ("| a | b |"), which never appears verbatim in the
+    PDF, so search each cell. Generic cells ("2025", "Standardized") also occur in surrounding prose, so the
+    table's region is anchored on its distinctive numbers and matches outside that band are dropped."""
+    is_table = snippet.lstrip().startswith("Table")
+    if is_table:
+        cells = [c.strip() for ln in snippet.splitlines()[1:] for c in ln.strip().strip("|").split("|")]
+        needles = [c for c in cells if len(c) >= 4 and not set(c) <= set("-: ")]
+    else:
+        needles = [re.sub(r"\s+", " ", ln).strip() for ln in snippet.splitlines()]
+        needles = [n for n in needles if len(n) >= 12]
+
+    band = None
+    if is_table:  # anchor: numbers that occur exactly once on the page
+        anchors = []
+        for n in dict.fromkeys(needles):
+            if len(n) >= 5 and re.fullmatch(r"[\d,.$%()\s-]+", n) and re.search(r"\d", n):
+                found = _find(page, n)
+                if len(found) == 1:
+                    anchors.append(found[0])
+        if anchors:
+            band = (min(r.y0 for r in anchors) - 45, max(r.y1 for r in anchors) + 8)
+
+    rects, seen = [], set()
+    for n in dict.fromkeys(needles):
+        for r in _find(page, n):
+            if band and not (band[0] <= r.y0 and r.y1 <= band[1]):
+                continue
+            key = tuple(round(v) for v in r)
+            if key not in seen:
+                seen.add(key)
+                rects.append(r)
+        if len(rects) >= max_rects:
+            break
+    return rects
+
+
 @app.get("/page_image/{doc_id}/{page_index}")
-def page_image(doc_id: str, page_index: int, highlight: str = Query(default="")):
+def page_image(
+    doc_id: str, page_index: int, highlight: str = Query(default=""), chunk_id: str = Query(default="")
+):
     import fitz
 
     get_pipeline()
@@ -104,8 +144,12 @@ def page_image(doc_id: str, page_index: int, highlight: str = Query(default=""))
     if not 1 <= page_index <= len(doc):
         raise HTTPException(404, "page out of range")
     page = doc.load_page(page_index - 1)
+    if chunk_id:  # preferred: the server looks the cited passage up, so the URL stays short
+        chunk = STATE["pipeline"].index.by_id.get(chunk_id)
+        if chunk is not None and chunk.doc_id == doc_id:
+            highlight = chunk.text
     if highlight:
-        for r in _search_rects(page, highlight):
+        for r in highlight_rects(page, highlight):
             page.add_highlight_annot(r)
     png = page.get_pixmap(matrix=fitz.Matrix(1.6, 1.6)).tobytes("png")
     doc.close()

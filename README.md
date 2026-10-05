@@ -9,6 +9,16 @@ RAG over the FY2024 and FY2025 annual reports of JPMorgan Chase, Bank of America
 retrieval accuracy, answer correctness, faithfulness and correct abstention on long, table-heavy financial filings?
 The app is the delivery vehicle; the evaluation, ablations and error analysis are the contribution.
 
+## What it looks like
+
+Each answer comes with clickable citation chips. Selecting one shows the cited passage and the real PDF page with that passage
+highlighted (tables are outlined cell by cell). A "How this answer was found" panel lists the retrieved passages and scores.
+Verify mode shows a coloured verdict badge (SUPPORTED, REFUTED, NOT ENOUGH INFO) with the evidence.
+
+![Highlighted source page: JPMorgan Chase FY2025 capital table](docs/highlighted_page_example.png)
+
+_Example: the capital table cited for a CET1 question (PDF page 96, printed page 94 of the JPMorgan Chase FY2025 report)._
+
 ## Architecture
 
 ```mermaid
@@ -39,7 +49,7 @@ Download the 8 PDFs as described in [data/README.md](data/README.md).
 python -m scripts.ingest --config configs/05_rerank.yaml            # parse, chunk, embed (cached), index
 BANKLENS_CONFIG=configs/05_rerank.yaml uvicorn app.main:app --port 8000
 streamlit run ui/streamlit_app.py
-# or: docker compose up --build
+# or: docker compose up --build   (provided but not yet tested: Docker was not installed on the dev machine)
 ```
 
 Develop and test for free with `provider: hash` / `provider: fake` (`configs/dev_fake.yaml`); `make test` never calls the API.

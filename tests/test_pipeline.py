@@ -117,6 +117,24 @@ def test_api(fake_corpus, monkeypatch):
     )
     img = client.get("/page_image/jpm_fy2025/2", params={"highlight": "CET1 capital ratio was 15.7%"})
     assert img.status_code == 200 and img.content[:4] == b"\x89PNG"
+    by_id = client.get("/page_image/jpm_fy2025/3", params={"chunk_id": "jpm_fy2025:p3:c1"})
+    assert by_id.status_code == 200 and by_id.content[:4] == b"\x89PNG"
     assert client.get("/page_image/jpm_fy2025/99").status_code == 404
     assert client.get("/page_image/nope/1").status_code == 404
     m.STATE.clear()
+
+
+def test_highlight_rects_text_and_table(fake_corpus):
+    import pymupdf
+
+    from app.main import highlight_rects
+
+    doc = pymupdf.open(fake_corpus / "raw" / "jpm_fy2025.pdf")
+    text_rects = highlight_rects(
+        doc[1], "The Common Equity Tier 1 (CET1) capital ratio was 15.7% at December 31, 2025."
+    )
+    assert text_rects
+    table = "Table: Consolidated Results of Operations (in millions)\n| Metric | 2025 | 2024 |\n| --- | --- | --- |\n| Net income | 58,000 | 54,000 |"
+    table_rects = highlight_rects(doc[2], table)
+    assert len(table_rects) >= 3  # markdown never matches verbatim; cells must
+    assert highlight_rects(doc[2], "text that is nowhere on this page at all") == []
