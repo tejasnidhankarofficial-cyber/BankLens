@@ -57,6 +57,15 @@ cached in `cache/hf`). PDFs, indexes, cache and logs are mounted from the host, 
 
 Develop and test for free with `provider: hash` / `provider: fake` (`configs/dev_fake.yaml`); `make test` never calls the API.
 
+## Running a demo
+
+```bash
+make demo   # starts the app in Docker, waits until it is ready, opens http://localhost:8501 (about 20 s)
+make stop   # shuts everything down
+```
+
+Docker Desktop must be running first. Cached example questions cost nothing; new questions cost about a cent.
+
 ## Budget rules
 
 All embeddings and LLM calls are cached in `cache/cache.sqlite` (key = sha256(model + input)), so re-running an eval costs $0.
