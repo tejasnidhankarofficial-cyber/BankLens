@@ -49,8 +49,11 @@ Download the 8 PDFs as described in [data/README.md](data/README.md).
 python -m scripts.ingest --config configs/05_rerank.yaml            # parse, chunk, embed (cached), index
 BANKLENS_CONFIG=configs/05_rerank.yaml uvicorn app.main:app --port 8000
 streamlit run ui/streamlit_app.py
-# or: docker compose up --build   (provided but not yet tested: Docker was not installed on the dev machine)
+# or: docker compose up --build   (API on :8000, UI on :8501)
 ```
+
+Docker notes: the first image build takes about 2 minutes. The first request after starting loads the reranker (about 30 s, weights
+cached in `cache/hf`). PDFs, indexes, cache and logs are mounted from the host, not baked into the image.
 
 Develop and test for free with `provider: hash` / `provider: fake` (`configs/dev_fake.yaml`); `make test` never calls the API.
 
