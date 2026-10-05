@@ -10,3 +10,7 @@ indexes/
 cache/
 logs/
 .DS_Store
+
+# Raw screen recordings (large). Commit only the compressed docs/demo.*
+*.MOV
+*.mov

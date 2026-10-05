@@ -15,6 +15,10 @@ Each answer comes with clickable citation chips. Selecting one shows the cited p
 highlighted (tables are outlined cell by cell). A "How this answer was found" panel lists the retrieved passages and scores.
 Verify mode shows a coloured verdict badge (SUPPORTED, REFUTED, NOT ENOUGH INFO) with the evidence.
 
+![BankLens demo: ask a question, open a citation, see the highlighted PDF page, and an unanswerable question being declined](docs/demo.gif)
+
+_40-second highlight reel (2x speed). The [full 4-minute walkthrough](docs/demo_full.mp4) is also in the repo._
+
 ![Highlighted source page: JPMorgan Chase FY2025 capital table](docs/highlighted_page_example.png)
 
 _Example: the capital table cited for a CET1 question (PDF page 96, printed page 94 of the JPMorgan Chase FY2025 report)._
